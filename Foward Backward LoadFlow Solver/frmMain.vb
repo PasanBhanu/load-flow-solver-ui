@@ -32,7 +32,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnAddLine_Click(sender As Object, e As EventArgs) Handles btnAddLine.Click
-        Dim line = frmAddLine.ShowDialog(overloaded:=True, New Line)
+        Dim line = frmAddLine.ShowDialog(True, New Line)
 
         If line.isValid Then
 
@@ -51,47 +51,6 @@ Public Class frmMain
             Project.edges.Add(Project.edgeCount, line)
 
             createGraph()
-        End If
-    End Sub
-
-    Private Sub listEdges_DoubleClick(sender As Object, e As EventArgs) Handles listEdges.DoubleClick
-        If listEdges.SelectedItems.Count > 0 Then
-            Dim edgeId = Integer.Parse(listEdges.FocusedItem.SubItems(0).Text)
-
-            Dim result As Edge = Nothing
-            If Project.edges.TryGetValue(edgeId, result) Then
-                If result IsNot Nothing Then
-                    If result.GetType() Is GetType(Line) Then
-                        Dim line = frmAddLine.ShowDialog(overloaded:=True, result)
-
-                        If line.isValid Then
-
-                            listEdges.FocusedItem.SubItems(1).Text = line.startNode
-                            listEdges.FocusedItem.SubItems(2).Text = line.endNode
-                            listEdges.FocusedItem.SubItems(3).Text = "Line " + line.type
-
-                            Project.edges.Remove(edgeId)
-                            Project.edges.Add(edgeId, line)
-
-                            createGraph()
-                        End If
-                    Else
-                        Dim transformer = frmAddTransformer.ShowDialog(overloaded:=True, result)
-
-                        If transformer.isValid Then
-
-                            listEdges.FocusedItem.SubItems(1).Text = transformer.startNode
-                            listEdges.FocusedItem.SubItems(2).Text = transformer.endNode
-                            listEdges.FocusedItem.SubItems(3).Text = "Transformer " + transformer.type
-
-                            Project.edges.Remove(edgeId)
-                            Project.edges.Add(edgeId, transformer)
-
-                            createGraph()
-                        End If
-                    End If
-                End If
-            End If
         End If
     End Sub
 
@@ -181,61 +140,6 @@ Public Class frmMain
             listLoads.Items.Remove(listLoads.FocusedItem)
 
             createGraph()
-        End If
-    End Sub
-
-    Private Sub listLoads_DoubleClick(sender As Object, e As EventArgs) Handles listLoads.DoubleClick
-        If listLoads.SelectedItems.Count > 0 Then
-            Dim loadId = Integer.Parse(listLoads.FocusedItem.SubItems(0).Text)
-
-            Dim result As Node = Nothing
-            If Project.loads.TryGetValue(loadId, result) Then
-                If result IsNot Nothing Then
-                    If result.GetType() Is GetType(Load) Then
-                        Dim load = frmAddLoad.ShowDialog(overloaded:=True, result)
-
-                        If load.isValid Then
-
-                            listLoads.FocusedItem.SubItems(1).Text = load.node
-                            listLoads.FocusedItem.SubItems(2).Text = load.connection
-                            listLoads.FocusedItem.SubItems(3).Text = "Load"
-
-                            Project.loads.Remove(loadId)
-                            Project.loads.Add(loadId, load)
-
-                            createGraph()
-                        End If
-                    ElseIf result.GetType() Is GetType(ShuntCapacitor) Then
-                        Dim capacitor = frmAddShuntCapacitor.ShowDialog(overloaded:=True, result)
-
-                        If capacitor.isValid Then
-
-                            listLoads.FocusedItem.SubItems(1).Text = capacitor.node
-                            listLoads.FocusedItem.SubItems(2).Text = capacitor.connection
-                            listLoads.FocusedItem.SubItems(3).Text = "Shunt Capacitor"
-
-                            Project.loads.Remove(loadId)
-                            Project.loads.Add(loadId, capacitor)
-
-                            createGraph()
-                        End If
-                    ElseIf result.GetType() Is GetType(DG) Then
-                        Dim generator = frmAddDG.ShowDialog(overloaded:=True, result)
-
-                        If generator.isValid Then
-
-                            listLoads.FocusedItem.SubItems(1).Text = generator.node
-                            listLoads.FocusedItem.SubItems(2).Text = generator.connection
-                            listLoads.FocusedItem.SubItems(3).Text = "Distributed Generator"
-
-                            Project.loads.Remove(loadId)
-                            Project.loads.Add(loadId, generator)
-
-                            createGraph()
-                        End If
-                    End If
-                End If
-            End If
         End If
     End Sub
 
@@ -716,6 +620,10 @@ Public Class frmMain
         Next
 
         viewer.Graph = graph
+        Me.SuspendLayout()
+        viewer.Dock = System.Windows.Forms.DockStyle.Fill
+        panViewer.Controls.Add(viewer)
+        Me.ResumeLayout()
 
     End Sub
 
@@ -857,4 +765,116 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Project.connectDatabase = False Then
+            End
+        End If
+    End Sub
+
+    Private Sub ModelBrowserToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelBrowserToolStripMenuItem.Click
+        frmBrowser.Show()
+    End Sub
+
+    Private Sub listEdges_DoubleClick(sender As Object, e As EventArgs) Handles listEdges.DoubleClick
+        If listEdges.SelectedItems.Count > 0 Then
+            Dim edgeId = Integer.Parse(listEdges.FocusedItem.SubItems(0).Text)
+
+            Dim result As Edge = Nothing
+            If Project.edges.TryGetValue(edgeId, result) Then
+                If result IsNot Nothing Then
+                    If result.GetType() Is GetType(Line) Then
+                        Dim line = frmAddLine.ShowDialog(True, result)
+
+                        If line.isValid Then
+
+                            listEdges.FocusedItem.SubItems(1).Text = line.startNode
+                            listEdges.FocusedItem.SubItems(2).Text = line.endNode
+                            listEdges.FocusedItem.SubItems(3).Text = "Line " + line.type
+
+                            Project.edges.Remove(edgeId)
+                            Project.edges.Add(edgeId, line)
+
+                            createGraph()
+                        End If
+                    Else
+                        Dim transformer = frmAddTransformer.ShowDialog(overloaded:=True, result)
+
+                        If transformer.isValid Then
+
+                            listEdges.FocusedItem.SubItems(1).Text = transformer.startNode
+                            listEdges.FocusedItem.SubItems(2).Text = transformer.endNode
+                            listEdges.FocusedItem.SubItems(3).Text = "Transformer " + transformer.type
+
+                            Project.edges.Remove(edgeId)
+                            Project.edges.Add(edgeId, transformer)
+
+                            createGraph()
+                        End If
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub listLoads_DoubleClick(sender As Object, e As EventArgs) Handles listLoads.DoubleClick
+        If listLoads.SelectedItems.Count > 0 Then
+            Dim loadId = Integer.Parse(listLoads.FocusedItem.SubItems(0).Text)
+
+            Dim result As Node = Nothing
+            If Project.loads.TryGetValue(loadId, result) Then
+                If result IsNot Nothing Then
+                    If result.GetType() Is GetType(Load) Then
+                        Dim load = frmAddLoad.ShowDialog(overloaded:=True, result)
+
+                        If load.isValid Then
+
+                            listLoads.FocusedItem.SubItems(1).Text = load.node
+                            listLoads.FocusedItem.SubItems(2).Text = load.connection
+                            listLoads.FocusedItem.SubItems(3).Text = "Load"
+
+                            Project.loads.Remove(loadId)
+                            Project.loads.Add(loadId, load)
+
+                            createGraph()
+                        End If
+                    ElseIf result.GetType() Is GetType(ShuntCapacitor) Then
+                        Dim capacitor = frmAddShuntCapacitor.ShowDialog(overloaded:=True, result)
+
+                        If capacitor.isValid Then
+
+                            listLoads.FocusedItem.SubItems(1).Text = capacitor.node
+                            listLoads.FocusedItem.SubItems(2).Text = capacitor.connection
+                            listLoads.FocusedItem.SubItems(3).Text = "Shunt Capacitor"
+
+                            Project.loads.Remove(loadId)
+                            Project.loads.Add(loadId, capacitor)
+
+                            createGraph()
+                        End If
+                    ElseIf result.GetType() Is GetType(DG) Then
+                        Dim generator = frmAddDG.ShowDialog(overloaded:=True, result)
+
+                        If generator.isValid Then
+
+                            listLoads.FocusedItem.SubItems(1).Text = generator.node
+                            listLoads.FocusedItem.SubItems(2).Text = generator.connection
+                            listLoads.FocusedItem.SubItems(3).Text = "Distributed Generator"
+
+                            Project.loads.Remove(loadId)
+                            Project.loads.Add(loadId, generator)
+
+                            createGraph()
+                        End If
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Public Sub addLog(ByVal message As String, ByVal color As Color)
+        Dim item As New ListViewItem
+        item.Text = message
+        item.ForeColor = color
+        listLog.Items.Add(item)
+    End Sub
 End Class

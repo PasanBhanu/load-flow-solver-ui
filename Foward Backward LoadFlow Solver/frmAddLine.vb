@@ -2,24 +2,46 @@
 
     Private line As Line
 
+
     ' *** Custom Dialog ***
-    Public Overloads Function ShowDialog(ByVal overloaded As Boolean, ByVal line As Line) As Line
+    Public Overloads Function ShowDialog(ByVal isEditor As Boolean, ByVal line As Line) As Line
         Me.line = line
         setupForm()
+        If isEditor Then
+            txtTitle.Text = "Transmission Line"
+            txtDescription.Text = "Model Tx Line with Exact Line Model"
+            txtTitle.ReadOnly = True
+            txtDescription.ReadOnly = True
+            txtStartNode.Enabled = True
+            txtEndNode.Enabled = True
+            btnLibrary.Visible = True
+        Else
+            txtStartNode.Text = 0
+            txtEndNode.Text = 0
+            txtStartNode.Enabled = False
+            txtEndNode.Enabled = False
+            btnLibrary.Visible = False
+            txtTitle.ReadOnly = False
+            txtDescription.ReadOnly = False
+        End If
         Me.ShowDialog()
         Return line
     End Function
 
     Public Overloads Shared Function Show(ByVal overloaded As Boolean, ByVal line As Line) As Line
         Dim tmp As New frmAddLine
-        Return tmp.ShowDialog(overloaded:=True, New Line)
+        Return tmp.ShowDialog(isEditor:=True, New Line)
     End Function
 
     Private Function setupForm()
+        txtTitle.Text = line.title
+        txtDescription.Text = line.description
         txtStartNode.Text = line.startNode
         txtEndNode.Text = line.endNode
-        txtResistance.Text = line.resistance
-        txtGmr.Text = line.gmr
+        txtResistance_P.Text = line.resistance_p
+        txtGmr_P.Text = line.gmr_p
+        txtResistance_N.Text = line.resistance_n
+        txtGmr_N.Text = line.gmr_n
         txtLength.Text = line.length
         txtFrequency.Text = line.frequency
         txtSoilResistivity.Text = line.soilResistivity
@@ -36,36 +58,20 @@
     End Function
 
     Private Function validate()
-        If txtStartNode.Text.Trim <> "" Then
-            If txtEndNode.Text.Trim <> "" Then
-                If txtResistance.Text <> "" Then
-                    If txtGmr.Text.Trim <> "" Then
-                        If txtLength.Text.Trim <> "" Then
-                            If txtFrequency.Text.Trim <> "" Then
-                                If txtSoilResistivity.Text.Trim <> "" Then
-                                    If cmbPhases.SelectedIndex >= 0 Then
-                                        If cmbType.SelectedIndex >= 0 Then
-                                            line.isValid = True
-                                            Return True
-                                        End If
-                                    End If
-                                End If
-                            End If
-                        End If
-                    End If
-                End If
-            End If
-        End If
-
-        MsgBox("Please fill all the fields", MsgBoxStyle.Information, "Load Flow Calculator")
+        line.isValid = True
+        Return True
     End Function
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If validate() Then
+            line.title = txtTitle.Text
+            line.description = txtDescription.Text
             line.startNode = txtStartNode.Text
             line.endNode = txtEndNode.Text
-            line.resistance = txtResistance.Text
-            line.gmr = txtGmr.Text
+            line.resistance_p = txtResistance_P.Text
+            line.gmr_p = txtGmr_P.Text
+            line.resistance_n = txtResistance_N.Text
+            line.gmr_n = txtGmr_N.Text
             line.length = txtLength.Text
             line.frequency = txtFrequency.Text
             line.soilResistivity = txtSoilResistivity.Text
@@ -94,10 +100,18 @@
             Else
                 txt1n.Enabled = True
             End If
+            txtGmr_N.Text = 0
+            txtResistance_N.Text = 0
+            txtGmr_N.Enabled = True
+            txtResistance_N.Enabled = True
         Else
             txt1n.Enabled = False
             txt2n.Enabled = False
             txt3n.Enabled = False
+            txtGmr_N.Text = 0
+            txtResistance_N.Text = 0
+            txtGmr_N.Enabled = False
+            txtResistance_N.Enabled = False
         End If
     End Sub
 

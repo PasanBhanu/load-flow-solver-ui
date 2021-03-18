@@ -4,8 +4,10 @@ Public Class Line
     Inherits Edge
 
     Public type As String = "Overhead"
-    Public resistance As Double
-    Public gmr As Double
+    Public resistance_p As Double = 0
+    Public gmr_p As Double = 0
+    Public resistance_n As Double = 0
+    Public gmr_n As Double = 0
     Public phases As Integer = 3
     Public length As Double = 1
     Public isNeutralAvailable As Boolean = True
@@ -28,20 +30,22 @@ Public Class Line
         Me.endNode = endNode
 
         Dim parameters As String() = parameterString.Split(New Char() {","c})
-        Me.resistance = parameters(0)
-        Me.gmr = parameters(1)
-        Me.phases = parameters(2)
-        Me.length = parameters(3)
-        Me.isNeutralAvailable = parameters(4)
-        Me.frequency = parameters(5)
-        Me.soilResistivity = parameters(6)
-        Me.type = parameters(7)
-        Me.L_12 = parameters(8)
-        Me.L_13 = parameters(9)
-        Me.L_23 = parameters(10)
-        Me.L_1N = parameters(11)
-        Me.L_2N = parameters(12)
-        Me.L_3N = parameters(13)
+        Me.resistance_p = parameters(0)
+        Me.gmr_p = parameters(1)
+        Me.resistance_n = parameters(2)
+        Me.gmr_n = parameters(3)
+        Me.phases = parameters(4)
+        Me.length = parameters(5)
+        Me.isNeutralAvailable = parameters(6)
+        Me.frequency = parameters(7)
+        Me.soilResistivity = parameters(8)
+        Me.type = parameters(9)
+        Me.L_12 = parameters(10)
+        Me.L_13 = parameters(11)
+        Me.L_23 = parameters(12)
+        Me.L_1N = parameters(13)
+        Me.L_2N = parameters(14)
+        Me.L_3N = parameters(15)
 
         If type = "O" Then
             Me.type = "Overhead"
@@ -51,8 +55,47 @@ Public Class Line
 
     End Sub
 
+    Public Sub New(dbID As Integer)
+        Me.dbID = dbID
+
+        Dim con As New OleDb.OleDbConnection
+        Dim READER As OleDb.OleDbDataReader
+        Dim COMMAND As OleDb.OleDbCommand
+        con.ConnectionString = Project.connectionString
+
+        Try
+            con.Open()
+            COMMAND = New OleDb.OleDbCommand("SELECT * FROM lines WHERE ID=" & dbID, con)
+            READER = COMMAND.ExecuteReader
+            While READER.Read
+                Me.title = READER("title")
+                Me.description = READER("description")
+                Me.resistance_p = READER("resistance_p")
+                Me.gmr_p = READER("gmr_p")
+                Me.resistance_n = READER("resistance_n")
+                Me.gmr_n = READER("gmr_n")
+                Me.phases = READER("phases")
+                Me.length = READER("length")
+                Me.isNeutralAvailable = READER("isNeutralAvailable")
+                Me.frequency = READER("frequency")
+                Me.soilResistivity = READER("soilResistivity")
+                Me.type = READER("type")
+                Me.L_12 = READER("l_12")
+                Me.L_13 = READER("l_13")
+                Me.L_23 = READER("l_23")
+                Me.L_1N = READER("l_1n")
+                Me.L_2N = READER("l_2n")
+                Me.L_3N = READER("l_3n")
+            End While
+            con.Close()
+        Catch ex As Exception
+            frmMain.addLog(ex.Message, Color.Red)
+            con.Dispose()
+        End Try
+    End Sub
+
     Public Function getParameters() As String
-        Dim parameters = resistance.ToString + "," + gmr.ToString + "," + phases.ToString + "," + length.ToString + "," + isNeutralAvailable.ToString + "," + frequency.ToString + "," + soilResistivity.ToString + ","
+        Dim parameters = resistance_p.ToString + "," + gmr_p.ToString + "," + resistance_n.ToString + "," + gmr_n.ToString + "," + phases.ToString + "," + length.ToString + "," + isNeutralAvailable.ToString + "," + frequency.ToString + "," + soilResistivity.ToString + ","
         If type = "Overhead" Then
             parameters += "O,"
         Else
@@ -62,51 +105,43 @@ Public Class Line
         Return parameters
     End Function
 
-    ' ----- Depricated -----
-    Public Function calculateResistance()
-        Dim R_11 = New Complex(0, 0)
-        Dim R_22 = New Complex(0, 0)
-        Dim R_33 = New Complex(0, 0)
-        Dim R_NN = New Complex(0, 0)
+    Public Sub addToDatabase()
 
-        Dim R_12 = New Complex(0, 0)
-        Dim R_13 = New Complex(0, 0)
-        Dim R_1N = New Complex(0, 0)
+    End Sub
 
-        Dim R_23 = New Complex(0, 0)
-        Dim R_2N = New Complex(0, 0)
+    Public Sub updateDatabase()
+        Dim con As New OleDb.OleDbConnection
+        Dim READER As OleDb.OleDbDataReader
+        Dim COMMAND As OleDb.OleDbCommand
+        con.ConnectionString = Project.connectionString
 
-        Dim R_3N = New Complex(0, 0)
-
-        ' Carson Equations
-        Dim R_ii = New Complex(resistance + 0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / gmr) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-
-        If phases = 3 Then
-            R_12 = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_12) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-            R_13 = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_13) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-            R_23 = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_23) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-        ElseIf phases = 2 Then
-            R_12 = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_12) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-        End If
-
-        If isNeutralAvailable Then
-            If phases = 3 Then
-                R_1N = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_1N) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-                R_2N = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_1N) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-                R_3N = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_1N) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-            ElseIf phases = 2 Then
-                R_1N = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_1N) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-                R_2N = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_1N) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-            Else
-                R_1N = New Complex(0.00158836 * frequency, 0.00202237 * frequency * (Math.Log(1 / L_1N) + 7.6786 + 0.5 * Math.Log(soilResistivity / frequency)))
-            End If
-        End If
-
-
-        Dim zMatrix = R_ii.Real.ToString + "+" + R_ii.Imaginary.ToString + "j," + R_12.Real.ToString + "+" + R_12.Imaginary.ToString + "j," + R_13.Real.ToString + "+" + R_13.Imaginary.ToString + "j,"
-        zMatrix = zMatrix + R_12.Real.ToString + "+" + R_12.Imaginary.ToString + "j," + R_ii.Real.ToString + "+" + R_ii.Imaginary.ToString + "j," + R_23.Real.ToString + "+" + R_23.Imaginary.ToString + "j,"
-        zMatrix = zMatrix + R_13.Real.ToString + "+" + R_13.Imaginary.ToString + "j," + R_23.Real.ToString + "+" + R_23.Imaginary.ToString + "j," + R_ii.Real.ToString + "+" + R_ii.Imaginary.ToString + "j"
-
-        Return zMatrix
-    End Function
+        Try
+            con.Open()
+            COMMAND = New OleDb.OleDbCommand("UPDATE lines SET title=@title, description=@description, resistance_p=@resistance_p, resistance_n=@resistance_n, gmr_p=@gmr_p, gmr_n=@gmr_n, phases=@phases, length=@lengthisNeutralAvailable=@isNeutralAvailable,frequency=@frequency, soilResistivity=@soilResistivity, type=@type,l_12=@l_12, l_13=@l_13, l_23=@l_23, l_1n=@l_1n, l_2n=@l_2n, l_3n=@l_3n WHERE ID=@dbID", con)
+            COMMAND.Parameters.AddWithValue("title", title)
+            COMMAND.Parameters.AddWithValue("description", description)
+            COMMAND.Parameters.AddWithValue("resistance_p", resistance_p)
+            COMMAND.Parameters.AddWithValue("gmr_p", gmr_p)
+            COMMAND.Parameters.AddWithValue("resistance_n", resistance_n)
+            COMMAND.Parameters.AddWithValue("gmr_n", gmr_n)
+            COMMAND.Parameters.AddWithValue("phases", phases)
+            COMMAND.Parameters.AddWithValue("length", length)
+            COMMAND.Parameters.AddWithValue("isNeutralAvailable", isNeutralAvailable)
+            COMMAND.Parameters.AddWithValue("frequency", frequency)
+            COMMAND.Parameters.AddWithValue("soilResistivity", soilResistivity)
+            COMMAND.Parameters.AddWithValue("type", type)
+            COMMAND.Parameters.AddWithValue("l_12", L_12)
+            COMMAND.Parameters.AddWithValue("l_13", L_13)
+            COMMAND.Parameters.AddWithValue("l_23", L_23)
+            COMMAND.Parameters.AddWithValue("l_1n", L_1N)
+            COMMAND.Parameters.AddWithValue("l_2n", L_2N)
+            COMMAND.Parameters.AddWithValue("l_3n", L_3N)
+            COMMAND.Parameters.AddWithValue("dbID", dbID)
+            READER = COMMAND.ExecuteReader
+            con.Close()
+        Catch ex As Exception
+            frmMain.addLog(ex.Message, Color.Red)
+            con.Dispose()
+        End Try
+    End Sub
 End Class

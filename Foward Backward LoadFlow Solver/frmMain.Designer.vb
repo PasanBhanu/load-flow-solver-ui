@@ -38,28 +38,32 @@ Partial Class frmMain
         Me.ValidateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportDataFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ModelBrowserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabEdges = New System.Windows.Forms.TabPage()
-        Me.btnDeleteEdge = New System.Windows.Forms.Button()
-        Me.btnAddTransformer = New System.Windows.Forms.Button()
-        Me.btnAddLine = New System.Windows.Forms.Button()
         Me.listEdges = New System.Windows.Forms.ListView()
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.tabLoads = New System.Windows.Forms.TabPage()
-        Me.btnAddDg = New System.Windows.Forms.Button()
-        Me.btnAddCapacitor = New System.Windows.Forms.Button()
-        Me.btnDeleteLoad = New System.Windows.Forms.Button()
-        Me.btnAddLoad = New System.Windows.Forms.Button()
-        Me.listLoads = New System.Windows.Forms.ListView()
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnDeleteEdge = New System.Windows.Forms.Button()
+        Me.btnAddTransformer = New System.Windows.Forms.Button()
+        Me.btnAddLine = New System.Windows.Forms.Button()
+        Me.tabLoads = New System.Windows.Forms.TabPage()
+        Me.listLoads = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnAddDg = New System.Windows.Forms.Button()
+        Me.btnAddCapacitor = New System.Windows.Forms.Button()
+        Me.btnDeleteLoad = New System.Windows.Forms.Button()
+        Me.btnAddLoad = New System.Windows.Forms.Button()
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -87,8 +91,6 @@ Partial Class frmMain
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.viewer = New Microsoft.Glee.GraphViewerGdi.GViewer()
-        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.tabEdges.SuspendLayout()
@@ -108,7 +110,7 @@ Partial Class frmMain
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SimulationToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SimulationToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(5, 2, 0, 2)
@@ -129,7 +131,7 @@ Partial Class frmMain
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'OpenToolStripMenuItem
@@ -138,13 +140,13 @@ Partial Class frmMain
         Me.OpenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.OpenToolStripMenuItem.Text = "&Open"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(177, 6)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(143, 6)
         '
         'SaveToolStripMenuItem
         '
@@ -152,24 +154,24 @@ Partial Class frmMain
         Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.SaveToolStripMenuItem.Text = "&Save"
         '
         'SaveAsToolStripMenuItem
         '
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
-        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.SaveAsToolStripMenuItem.Text = "Save &As"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(143, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'SimulationToolStripMenuItem
@@ -205,6 +207,30 @@ Partial Class frmMain
         Me.ExportDataFileToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExportDataFileToolStripMenuItem.Text = "Export Data File"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        '
+        'SettingsToolStripMenuItem
+        '
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SettingsToolStripMenuItem.Text = "Settings"
+        '
+        'ToolsToolStripMenuItem
+        '
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ModelBrowserToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
+        Me.ToolsToolStripMenuItem.Text = "Tools"
+        '
+        'ModelBrowserToolStripMenuItem
+        '
+        Me.ModelBrowserToolStripMenuItem.Name = "ModelBrowserToolStripMenuItem"
+        Me.ModelBrowserToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.ModelBrowserToolStripMenuItem.Text = "Model Browser"
+        '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem})
@@ -232,10 +258,10 @@ Partial Class frmMain
         '
         'tabEdges
         '
+        Me.tabEdges.Controls.Add(Me.listEdges)
         Me.tabEdges.Controls.Add(Me.btnDeleteEdge)
         Me.tabEdges.Controls.Add(Me.btnAddTransformer)
         Me.tabEdges.Controls.Add(Me.btnAddLine)
-        Me.tabEdges.Controls.Add(Me.listEdges)
         Me.tabEdges.Location = New System.Drawing.Point(4, 22)
         Me.tabEdges.Name = "tabEdges"
         Me.tabEdges.Padding = New System.Windows.Forms.Padding(3)
@@ -243,6 +269,40 @@ Partial Class frmMain
         Me.tabEdges.TabIndex = 0
         Me.tabEdges.Text = "Edges"
         Me.tabEdges.UseVisualStyleBackColor = True
+        '
+        'listEdges
+        '
+        Me.listEdges.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8})
+        Me.listEdges.FullRowSelect = True
+        Me.listEdges.GridLines = True
+        Me.listEdges.HideSelection = False
+        Me.listEdges.Location = New System.Drawing.Point(2, 3)
+        Me.listEdges.Name = "listEdges"
+        Me.listEdges.Size = New System.Drawing.Size(665, 360)
+        Me.listEdges.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.listEdges.TabIndex = 6
+        Me.listEdges.UseCompatibleStateImageBehavior = False
+        Me.listEdges.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "#"
+        Me.ColumnHeader5.Width = 40
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "Start"
+        Me.ColumnHeader6.Width = 150
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "End"
+        Me.ColumnHeader7.Width = 150
+        '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.Text = "Type"
+        Me.ColumnHeader8.Width = 300
         '
         'btnDeleteEdge
         '
@@ -271,51 +331,13 @@ Partial Class frmMain
         Me.btnAddLine.Text = "Add Line"
         Me.btnAddLine.UseVisualStyleBackColor = True
         '
-        'listEdges
-        '
-        Me.listEdges.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
-        Me.listEdges.FullRowSelect = True
-        Me.listEdges.GridLines = True
-        Me.listEdges.HideSelection = False
-        Me.listEdges.Location = New System.Drawing.Point(3, 3)
-        Me.listEdges.Name = "listEdges"
-        Me.listEdges.Size = New System.Drawing.Size(665, 360)
-        Me.listEdges.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.listEdges.TabIndex = 1
-        Me.listEdges.UseCompatibleStateImageBehavior = False
-        Me.listEdges.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Name = "ColumnHeader4"
-        Me.ColumnHeader4.Text = "#"
-        Me.ColumnHeader4.Width = 40
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Name = "ColumnHeader1"
-        Me.ColumnHeader1.Text = "Start"
-        Me.ColumnHeader1.Width = 150
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Name = "ColumnHeader2"
-        Me.ColumnHeader2.Text = "End"
-        Me.ColumnHeader2.Width = 150
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Name = "ColumnHeader3"
-        Me.ColumnHeader3.Text = "Type"
-        Me.ColumnHeader3.Width = 200
-        '
         'tabLoads
         '
+        Me.tabLoads.Controls.Add(Me.listLoads)
         Me.tabLoads.Controls.Add(Me.btnAddDg)
         Me.tabLoads.Controls.Add(Me.btnAddCapacitor)
         Me.tabLoads.Controls.Add(Me.btnDeleteLoad)
         Me.tabLoads.Controls.Add(Me.btnAddLoad)
-        Me.tabLoads.Controls.Add(Me.listLoads)
         Me.tabLoads.Location = New System.Drawing.Point(4, 22)
         Me.tabLoads.Name = "tabLoads"
         Me.tabLoads.Padding = New System.Windows.Forms.Padding(3)
@@ -323,6 +345,40 @@ Partial Class frmMain
         Me.tabLoads.TabIndex = 1
         Me.tabLoads.Text = "Loads & Devices"
         Me.tabLoads.UseVisualStyleBackColor = True
+        '
+        'listLoads
+        '
+        Me.listLoads.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4})
+        Me.listLoads.FullRowSelect = True
+        Me.listLoads.GridLines = True
+        Me.listLoads.HideSelection = False
+        Me.listLoads.Location = New System.Drawing.Point(0, 3)
+        Me.listLoads.Name = "listLoads"
+        Me.listLoads.Size = New System.Drawing.Size(665, 360)
+        Me.listLoads.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.listLoads.TabIndex = 10
+        Me.listLoads.UseCompatibleStateImageBehavior = False
+        Me.listLoads.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "#"
+        Me.ColumnHeader1.Width = 40
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Node"
+        Me.ColumnHeader2.Width = 150
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Connection"
+        Me.ColumnHeader3.Width = 150
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Type"
+        Me.ColumnHeader4.Width = 300
         '
         'btnAddDg
         '
@@ -359,44 +415,6 @@ Partial Class frmMain
         Me.btnAddLoad.TabIndex = 6
         Me.btnAddLoad.Text = "Add Load"
         Me.btnAddLoad.UseVisualStyleBackColor = True
-        '
-        'listLoads
-        '
-        Me.listLoads.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8})
-        Me.listLoads.FullRowSelect = True
-        Me.listLoads.GridLines = True
-        Me.listLoads.HideSelection = False
-        Me.listLoads.Location = New System.Drawing.Point(3, 3)
-        Me.listLoads.Name = "listLoads"
-        Me.listLoads.Size = New System.Drawing.Size(665, 360)
-        Me.listLoads.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.listLoads.TabIndex = 2
-        Me.listLoads.UseCompatibleStateImageBehavior = False
-        Me.listLoads.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Name = "ColumnHeader4"
-        Me.ColumnHeader5.Text = "#"
-        Me.ColumnHeader5.Width = 40
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Name = "ColumnHeader1"
-        Me.ColumnHeader6.Text = "Node ID"
-        Me.ColumnHeader6.Width = 150
-        '
-        'ColumnHeader7
-        '
-        Me.ColumnHeader7.Name = "ColumnHeader2"
-        Me.ColumnHeader7.Text = "Connection Type"
-        Me.ColumnHeader7.Width = 150
-        '
-        'ColumnHeader8
-        '
-        Me.ColumnHeader8.Name = "ColumnHeader3"
-        Me.ColumnHeader8.Text = "Load Type"
-        Me.ColumnHeader8.Width = 300
         '
         'tabSettings
         '
@@ -650,33 +668,23 @@ Partial Class frmMain
         '
         'viewer
         '
-        Me.viewer.AsyncLayout = True
+        Me.viewer.AsyncLayout = False
         Me.viewer.AutoScroll = True
         Me.viewer.BackwardEnabled = False
+        Me.viewer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.viewer.ForwardEnabled = False
         Me.viewer.Graph = Nothing
-        Me.viewer.Location = New System.Drawing.Point(3, 3)
+        Me.viewer.Location = New System.Drawing.Point(0, 0)
         Me.viewer.MouseHitDistance = 0.05R
         Me.viewer.Name = "viewer"
         Me.viewer.NavigationVisible = True
         Me.viewer.PanButtonPressed = False
         Me.viewer.SaveButtonVisible = True
-        Me.viewer.Size = New System.Drawing.Size(381, 443)
-        Me.viewer.TabIndex = 2
+        Me.viewer.Size = New System.Drawing.Size(387, 449)
+        Me.viewer.TabIndex = 1
         Me.viewer.ZoomF = 1.0R
         Me.viewer.ZoomFraction = 0.5R
         Me.viewer.ZoomWindowThreshold = 0.05R
-        '
-        'SettingsToolStripMenuItem
-        '
-        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.SettingsToolStripMenuItem.Text = "Settings"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
         '
         'frmMain
         '
@@ -734,21 +742,11 @@ Partial Class frmMain
     Friend WithEvents listLog As ListBox
     Friend WithEvents btnCalculate As Button
     Friend WithEvents tabResults As TabPage
-    Friend WithEvents listEdges As ListView
-    Friend WithEvents ColumnHeader1 As ColumnHeader
-    Friend WithEvents ColumnHeader2 As ColumnHeader
-    Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents btnAddLine As Button
     Friend WithEvents btnAddTransformer As Button
     Friend WithEvents btnDeleteEdge As Button
-    Friend WithEvents ColumnHeader4 As ColumnHeader
     Friend WithEvents btnDeleteLoad As Button
     Friend WithEvents btnAddLoad As Button
-    Friend WithEvents listLoads As ListView
-    Friend WithEvents ColumnHeader5 As ColumnHeader
-    Friend WithEvents ColumnHeader6 As ColumnHeader
-    Friend WithEvents ColumnHeader7 As ColumnHeader
-    Friend WithEvents ColumnHeader8 As ColumnHeader
     Friend WithEvents btnAddDg As Button
     Friend WithEvents btnAddCapacitor As Button
     Friend WithEvents txtRoundFactor As TextBox
@@ -774,7 +772,23 @@ Partial Class frmMain
     Friend WithEvents ValidateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportDataFileToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents viewer As Microsoft.Glee.GraphViewerGdi.GViewer
     Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents listEdges As ListView
+    Friend WithEvents ColumnHeader44 As ColumnHeader
+    Friend WithEvents ColumnHeader11 As ColumnHeader
+    Friend WithEvents ColumnHeader22 As ColumnHeader
+    Friend WithEvents ColumnHeader33 As ColumnHeader
+    Friend WithEvents listLoads As ListView
+    Friend WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents ColumnHeader6 As ColumnHeader
+    Friend WithEvents ColumnHeader7 As ColumnHeader
+    Friend WithEvents ColumnHeader8 As ColumnHeader
+    Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ModelBrowserToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColumnHeader1 As ColumnHeader
+    Private WithEvents ColumnHeader2 As ColumnHeader
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents ColumnHeader4 As ColumnHeader
+    Friend WithEvents viewer As Microsoft.Glee.GraphViewerGdi.GViewer
 End Class
