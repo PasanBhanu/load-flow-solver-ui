@@ -15,12 +15,14 @@
             txtStartNode.Enabled = True
             txtEndNode.Enabled = True
             btnLibrary.Visible = True
+            btnAddToLibrary.Visible = True
         Else
-            txtStartNode.Text = 0
-            txtEndNode.Text = 0
+            txtStartNode.Text = "NA"
+            txtEndNode.Text = "NA"
             txtStartNode.Enabled = False
             txtEndNode.Enabled = False
             btnLibrary.Visible = False
+            btnAddToLibrary.Visible = False
             txtTitle.ReadOnly = False
             txtDescription.ReadOnly = False
         End If
@@ -57,17 +59,120 @@
         line.isValid = False
     End Function
 
-    Private Function validate()
-        line.isValid = True
-        Return True
-    End Function
+    Private Sub validate()
+        If txtTitle.Text <> "" Then
+            If txtDescription.Text.Trim <> "" Then
+                If txtStartNode.Text <> "" Then
+                    If txtEndNode.Text.Trim <> "" Then
+                        If txtResistance_P.Text <> "" Then
+                            If txtGmr_P.Text.Trim <> "" Then
+                                If txtResistance_N.Text <> "" Then
+                                    If txtGmr_N.Text.Trim <> "" Then
+                                        If txtLength.Text.Trim <> "" Then
+                                            If txtFrequency.Text.Trim <> "" Then
+                                                If txtSoilResistivity.Text.Trim <> "" Then
+                                                    If txt12.Text.Trim <> "" Then
+                                                        If txt13.Text.Trim <> "" Then
+                                                            If txt23.Text.Trim <> "" Then
+                                                                If txt1n.Text.Trim <> "" Then
+                                                                    If txt2n.Text.Trim <> "" Then
+                                                                        If txt3n.Text.Trim <> "" Then
+                                                                            If cmbPhases.SelectedIndex >= 0 Then
+                                                                                If cmbType.SelectedIndex >= 0 Then
+                                                                                    line.isValid = True
+                                                                                End If
+                                                                            End If
+                                                                        End If
+                                                                    End If
+                                                                End If
+                                                            End If
+                                                        End If
+                                                    End If
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+
+        If txtStartNode.Text <> "NA" Then
+            If txtStartNode.Text.Trim = 0 Then
+                line.isValid = False
+                MsgBox("You cannot select 0 as Node ID. Please select number above 0.", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+                Exit Sub
+            End If
+        End If
+
+        If txtEndNode.Text <> "NA" Then
+            If txtEndNode.Text.Trim = 0 Then
+                line.isValid = False
+                MsgBox("You cannot select 0 as Node ID. Please select number above 0.", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+                Exit Sub
+            End If
+        End If
+
+        If txtGmr_P.Text = 0 Then
+            line.isValid = False
+            MsgBox("Phase GMR should be greater than 0", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+            Exit Sub
+        End If
+
+        If txtResistance_P.Text = 0 Then
+            line.isValid = False
+            MsgBox("Phase Resistance should be greater than 0", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+            Exit Sub
+        End If
+
+        If chkNeutral.Checked And txtGmr_N.Text = 0 Then
+            line.isValid = False
+            MsgBox("Neutral GMR should be greater than 0", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+            Exit Sub
+        End If
+
+        If chkNeutral.Checked And txtResistance_N.Text = 0 Then
+            line.isValid = False
+            MsgBox("Neutral Resistance should be greater than 0", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+            Exit Sub
+        End If
+
+        If txtLength.Text = 0 Then
+            line.isValid = False
+            MsgBox("Length should be greater than 0", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+            Exit Sub
+        End If
+
+        If txtFrequency.Text = 0 Then
+            line.isValid = False
+            MsgBox("Frequency should be greater than 0", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+            Exit Sub
+        End If
+
+        If txtSoilResistivity.Text = 0 Then
+            line.isValid = False
+            MsgBox("Soil Resistivity should be greater than 0", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+            Exit Sub
+        End If
+
+        If line.isValid = False Then
+            MsgBox("Please fill all the required parameters", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+        End If
+    End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If validate() Then
+        validate()
+
+        If line.isValid Then
             line.title = txtTitle.Text
             line.description = txtDescription.Text
-            line.startNode = txtStartNode.Text
-            line.endNode = txtEndNode.Text
+            If txtStartNode.Text <> "NA" Then
+                line.startNode = txtStartNode.Text
+                line.endNode = txtEndNode.Text
+            End If
             line.resistance_p = txtResistance_P.Text
             line.gmr_p = txtGmr_P.Text
             line.resistance_n = txtResistance_N.Text
@@ -88,6 +193,10 @@
         End If
     End Sub
 
+    Private Sub btnLibrary_Click(sender As Object, e As EventArgs) Handles btnLibrary.Click
+
+    End Sub
+
     Private Sub chkNeutral_CheckedChanged(sender As Object, e As EventArgs) Handles chkNeutral.CheckedChanged
         If chkNeutral.CheckState = CheckState.Checked Then
             If cmbPhases.Text = 3 Then
@@ -97,8 +206,11 @@
             ElseIf cmbPhases.Text = 2 Then
                 txt1n.Enabled = True
                 txt2n.Enabled = True
+                txt3n.Text = 0
             Else
                 txt1n.Enabled = True
+                txt2n.Text = 0
+                txt3n.Text = 0
             End If
             txtGmr_N.Text = 0
             txtResistance_N.Text = 0
@@ -108,6 +220,9 @@
             txt1n.Enabled = False
             txt2n.Enabled = False
             txt3n.Enabled = False
+            txt1n.Text = 0
+            txt2n.Text = 0
+            txt3n.Text = 0
             txtGmr_N.Text = 0
             txtResistance_N.Text = 0
             txtGmr_N.Enabled = False
@@ -124,10 +239,15 @@
             txt12.Enabled = True
             txt13.Enabled = False
             txt23.Enabled = False
+            txt13.Text = 0
+            txt23.Text = 0
         Else
             txt12.Enabled = False
             txt13.Enabled = False
             txt23.Enabled = False
+            txt12.Text = 0
+            txt13.Text = 0
+            txt23.Text = 0
         End If
 
         If chkNeutral.CheckState = CheckState.Checked Then
@@ -138,13 +258,129 @@
             ElseIf cmbPhases.Text = 2 Then
                 txt1n.Enabled = True
                 txt2n.Enabled = True
+                txt3n.Enabled = False
+                txt3n.Text = 0
             Else
                 txt1n.Enabled = True
+                txt2n.Enabled = False
+                txt3n.Enabled = False
+                txt2n.Text = 0
+                txt3n.Text = 0
             End If
         Else
             txt1n.Enabled = False
             txt2n.Enabled = False
             txt3n.Enabled = False
+            txt1n.Text = 0
+            txt2n.Text = 0
+            txt3n.Text = 0
         End If
     End Sub
+
+    ' *** GUI Enhancements ***
+
+    Private Sub txtEndNode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEndNode.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+    End Sub
+
+    Private Sub txtFrequency_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFrequency.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtGmr_N_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtGmr_N.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtGmr_P_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtGmr_P.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtLength_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLength.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtResistance_N_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtResistance_N.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtResistance_P_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtResistance_P.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtSoilResistivity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSoilResistivity.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtStartNode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtStartNode.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+    End Sub
+
+    Private Sub txt12_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txt12.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txt13_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txt13.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txt1n_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txt1n.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txt23_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txt23.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txt2n_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txt2n.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txt3n_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txt3n.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+
 End Class

@@ -85,6 +85,7 @@ Partial Class frmAddLine
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
+        Me.btnAddToLibrary = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtEndNode
@@ -633,11 +634,21 @@ Partial Class frmAddLine
         Me.Label31.TabIndex = 84
         Me.Label31.Text = "Parameters"
         '
+        'btnAddToLibrary
+        '
+        Me.btnAddToLibrary.Location = New System.Drawing.Point(104, 417)
+        Me.btnAddToLibrary.Name = "btnAddToLibrary"
+        Me.btnAddToLibrary.Size = New System.Drawing.Size(104, 23)
+        Me.btnAddToLibrary.TabIndex = 85
+        Me.btnAddToLibrary.Text = "Add To Library"
+        Me.btnAddToLibrary.UseVisualStyleBackColor = True
+        '
         'frmAddLine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(517, 452)
+        Me.Controls.Add(Me.btnAddToLibrary)
         Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.txtDescription)
         Me.Controls.Add(Me.Label29)
@@ -775,4 +786,5 @@ Partial Class frmAddLine
     Friend WithEvents txtTitle As TextBox
     Friend WithEvents Label30 As Label
     Friend WithEvents Label31 As Label
+    Friend WithEvents btnAddToLibrary As Button
 End Class

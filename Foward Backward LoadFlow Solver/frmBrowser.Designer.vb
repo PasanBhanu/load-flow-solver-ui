@@ -32,7 +32,7 @@ Partial Class frmBrowser
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnAddLine = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
@@ -63,7 +63,7 @@ Partial Class frmBrowser
         '
         Me.ColumnHeader1.Name = "ColumnHeader1"
         Me.ColumnHeader1.Text = "Category"
-        Me.ColumnHeader1.Width = 100
+        Me.ColumnHeader1.Width = 150
         '
         'ColumnHeader2
         '
@@ -75,7 +75,7 @@ Partial Class frmBrowser
         '
         Me.ColumnHeader3.Name = "ColumnHeader3"
         Me.ColumnHeader3.Text = "Description"
-        Me.ColumnHeader3.Width = 250
+        Me.ColumnHeader3.Width = 200
         '
         'cmbType
         '
@@ -121,14 +121,14 @@ Partial Class frmBrowser
         Me.Button2.Text = "Add Transformer"
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnAddLine
         '
-        Me.Button3.Location = New System.Drawing.Point(129, 418)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 15
-        Me.Button3.Text = "Add Line"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnAddLine.Location = New System.Drawing.Point(129, 418)
+        Me.btnAddLine.Name = "btnAddLine"
+        Me.btnAddLine.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddLine.TabIndex = 15
+        Me.btnAddLine.Text = "Add Line"
+        Me.btnAddLine.UseVisualStyleBackColor = True
         '
         'Button4
         '
@@ -175,14 +175,14 @@ Partial Class frmBrowser
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.btnAddLine)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.cmbType)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.listModels)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmBrowser"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -202,7 +202,7 @@ Partial Class frmBrowser
     Friend WithEvents Label1 As Label
     Friend WithEvents btnSearch As Button
     Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnAddLine As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button

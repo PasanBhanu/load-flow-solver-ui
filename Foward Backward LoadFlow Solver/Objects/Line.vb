@@ -106,7 +106,38 @@ Public Class Line
     End Function
 
     Public Sub addToDatabase()
+        Dim con As New OleDb.OleDbConnection
+        Dim READER As OleDb.OleDbDataReader
+        Dim COMMAND As OleDb.OleDbCommand
+        con.ConnectionString = Project.connectionString
 
+        Try
+            con.Open()
+            COMMAND = New OleDb.OleDbCommand("INSERT INTO lines (title, description, resistance_p, resistance_n, gmr_p, gmr_n, phases, length, isNeutralAvailable,frequency, soilResistivity, type,l_12, l_13, l_23, l_1n, l_2n, l_3n) VALUES(@title, @description, @resistance_p, @resistance_n, @gmr_p, @gmr_n, @phases, @length, @isNeutralAvailable, @frequency, @soilResistivity, @type, @l_12, @l_13, @l_23, @l_1n, @l_2n, @l_3n)", con)
+            COMMAND.Parameters.AddWithValue("title", title)
+            COMMAND.Parameters.AddWithValue("description", description)
+            COMMAND.Parameters.AddWithValue("resistance_p", resistance_p)
+            COMMAND.Parameters.AddWithValue("gmr_p", gmr_p)
+            COMMAND.Parameters.AddWithValue("resistance_n", resistance_n)
+            COMMAND.Parameters.AddWithValue("gmr_n", gmr_n)
+            COMMAND.Parameters.AddWithValue("phases", phases)
+            COMMAND.Parameters.AddWithValue("length", length)
+            COMMAND.Parameters.AddWithValue("isNeutralAvailable", isNeutralAvailable)
+            COMMAND.Parameters.AddWithValue("frequency", frequency)
+            COMMAND.Parameters.AddWithValue("soilResistivity", soilResistivity)
+            COMMAND.Parameters.AddWithValue("type", type)
+            COMMAND.Parameters.AddWithValue("l_12", L_12)
+            COMMAND.Parameters.AddWithValue("l_13", L_13)
+            COMMAND.Parameters.AddWithValue("l_23", L_23)
+            COMMAND.Parameters.AddWithValue("l_1n", L_1N)
+            COMMAND.Parameters.AddWithValue("l_2n", L_2N)
+            COMMAND.Parameters.AddWithValue("l_3n", L_3N)
+            READER = COMMAND.ExecuteReader
+            con.Close()
+        Catch ex As Exception
+            frmMain.addLog(ex.Message, Color.Red)
+            con.Dispose()
+        End Try
     End Sub
 
     Public Sub updateDatabase()
@@ -117,7 +148,7 @@ Public Class Line
 
         Try
             con.Open()
-            COMMAND = New OleDb.OleDbCommand("UPDATE lines SET title=@title, description=@description, resistance_p=@resistance_p, resistance_n=@resistance_n, gmr_p=@gmr_p, gmr_n=@gmr_n, phases=@phases, length=@lengthisNeutralAvailable=@isNeutralAvailable,frequency=@frequency, soilResistivity=@soilResistivity, type=@type,l_12=@l_12, l_13=@l_13, l_23=@l_23, l_1n=@l_1n, l_2n=@l_2n, l_3n=@l_3n WHERE ID=@dbID", con)
+            COMMAND = New OleDb.OleDbCommand("UPDATE lines SET title=@title, description=@description, resistance_p=@resistance_p, resistance_n=@resistance_n, gmr_p=@gmr_p, gmr_n=@gmr_n, phases=@phases, length=@length, isNeutralAvailable=@isNeutralAvailable,frequency=@frequency, soilResistivity=@soilResistivity, type=@type,l_12=@l_12, l_13=@l_13, l_23=@l_23, l_1n=@l_1n, l_2n=@l_2n, l_3n=@l_3n WHERE ID=@dbID", con)
             COMMAND.Parameters.AddWithValue("title", title)
             COMMAND.Parameters.AddWithValue("description", description)
             COMMAND.Parameters.AddWithValue("resistance_p", resistance_p)
@@ -144,4 +175,5 @@ Public Class Line
             con.Dispose()
         End Try
     End Sub
+
 End Class
