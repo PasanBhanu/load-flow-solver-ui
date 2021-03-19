@@ -31,11 +31,11 @@ Partial Class frmBrowser
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnAddTransformer = New System.Windows.Forms.Button()
         Me.btnAddLine = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.btnAddLoad = New System.Windows.Forms.Button()
+        Me.btnAddCapacitor = New System.Windows.Forms.Button()
+        Me.btnAddGenerator = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
@@ -81,7 +81,7 @@ Partial Class frmBrowser
         '
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"All", "Loads", "Capasitor Banks", "Distributed Generators", "Transmission Lines", "Transformers"})
+        Me.cmbType.Items.AddRange(New Object() {"All", "Loads", "Capacitor Banks", "Distributed Generators", "Transmission Lines", "Transformers"})
         Me.cmbType.Location = New System.Drawing.Point(456, 11)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(133, 21)
@@ -112,14 +112,14 @@ Partial Class frmBrowser
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnAddTransformer
         '
-        Me.Button2.Location = New System.Drawing.Point(12, 418)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(111, 23)
-        Me.Button2.TabIndex = 14
-        Me.Button2.Text = "Add Transformer"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnAddTransformer.Location = New System.Drawing.Point(12, 418)
+        Me.btnAddTransformer.Name = "btnAddTransformer"
+        Me.btnAddTransformer.Size = New System.Drawing.Size(111, 23)
+        Me.btnAddTransformer.TabIndex = 14
+        Me.btnAddTransformer.Text = "Add Transformer"
+        Me.btnAddTransformer.UseVisualStyleBackColor = True
         '
         'btnAddLine
         '
@@ -130,32 +130,32 @@ Partial Class frmBrowser
         Me.btnAddLine.Text = "Add Line"
         Me.btnAddLine.UseVisualStyleBackColor = True
         '
-        'Button4
+        'btnAddLoad
         '
-        Me.Button4.Location = New System.Drawing.Point(210, 418)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 16
-        Me.Button4.Text = "Add Load"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnAddLoad.Location = New System.Drawing.Point(210, 418)
+        Me.btnAddLoad.Name = "btnAddLoad"
+        Me.btnAddLoad.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddLoad.TabIndex = 16
+        Me.btnAddLoad.Text = "Add Load"
+        Me.btnAddLoad.UseVisualStyleBackColor = True
         '
-        'Button5
+        'btnAddCapacitor
         '
-        Me.Button5.Location = New System.Drawing.Point(291, 418)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(101, 23)
-        Me.Button5.TabIndex = 17
-        Me.Button5.Text = "Add Capacitor"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.btnAddCapacitor.Location = New System.Drawing.Point(291, 418)
+        Me.btnAddCapacitor.Name = "btnAddCapacitor"
+        Me.btnAddCapacitor.Size = New System.Drawing.Size(101, 23)
+        Me.btnAddCapacitor.TabIndex = 17
+        Me.btnAddCapacitor.Text = "Add Capacitor"
+        Me.btnAddCapacitor.UseVisualStyleBackColor = True
         '
-        'Button6
+        'btnAddGenerator
         '
-        Me.Button6.Location = New System.Drawing.Point(398, 418)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(96, 23)
-        Me.Button6.TabIndex = 18
-        Me.Button6.Text = "Add Generator"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.btnAddGenerator.Location = New System.Drawing.Point(398, 418)
+        Me.btnAddGenerator.Name = "btnAddGenerator"
+        Me.btnAddGenerator.Size = New System.Drawing.Size(96, 23)
+        Me.btnAddGenerator.TabIndex = 18
+        Me.btnAddGenerator.Text = "Add Generator"
+        Me.btnAddGenerator.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
@@ -172,11 +172,11 @@ Partial Class frmBrowser
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(602, 450)
         Me.Controls.Add(Me.btnDelete)
-        Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.btnAddGenerator)
+        Me.Controls.Add(Me.btnAddCapacitor)
+        Me.Controls.Add(Me.btnAddLoad)
         Me.Controls.Add(Me.btnAddLine)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnAddTransformer)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.cmbType)
         Me.Controls.Add(Me.txtSearch)
@@ -201,10 +201,10 @@ Partial Class frmBrowser
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents btnSearch As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnAddTransformer As Button
     Friend WithEvents btnAddLine As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button6 As Button
+    Friend WithEvents btnAddLoad As Button
+    Friend WithEvents btnAddCapacitor As Button
+    Friend WithEvents btnAddGenerator As Button
     Friend WithEvents btnDelete As Button
 End Class

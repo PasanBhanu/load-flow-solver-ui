@@ -8,7 +8,7 @@ Public Class frmMain
     Public dataLog As String
 
     Private Sub btnAddTransformer_Click(sender As Object, e As EventArgs) Handles btnAddTransformer.Click
-        Dim transformer = frmAddTransformer.ShowDialog(overloaded:=True, New Transformer)
+        Dim transformer = frmAddTransformer.ShowDialog(isEditor:=True, New Transformer)
 
         If transformer.isValid Then
 
@@ -797,7 +797,7 @@ Public Class frmMain
                             createGraph()
                         End If
                     Else
-                        Dim transformer = frmAddTransformer.ShowDialog(overloaded:=True, result)
+                        Dim transformer = frmAddTransformer.ShowDialog(isEditor:=True, result)
 
                         If transformer.isValid Then
 

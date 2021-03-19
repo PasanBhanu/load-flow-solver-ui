@@ -47,12 +47,18 @@ Partial Class frmAddTransformer
         Me.cmbType = New System.Windows.Forms.ComboBox()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnLibrary = New System.Windows.Forms.Button()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.txtTitle = New System.Windows.Forms.TextBox()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.btnAddToLibrary = New System.Windows.Forms.Button()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(10, 13)
+        Me.Label1.Location = New System.Drawing.Point(11, 95)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
         Me.Label1.TabIndex = 0
@@ -60,22 +66,22 @@ Partial Class frmAddTransformer
         '
         'txtStartNode
         '
-        Me.txtStartNode.Location = New System.Drawing.Point(146, 10)
+        Me.txtStartNode.Location = New System.Drawing.Point(147, 92)
         Me.txtStartNode.Name = "txtStartNode"
-        Me.txtStartNode.Size = New System.Drawing.Size(86, 20)
+        Me.txtStartNode.Size = New System.Drawing.Size(159, 20)
         Me.txtStartNode.TabIndex = 1
         '
         'txtEndNode
         '
-        Me.txtEndNode.Location = New System.Drawing.Point(146, 36)
+        Me.txtEndNode.Location = New System.Drawing.Point(147, 118)
         Me.txtEndNode.Name = "txtEndNode"
-        Me.txtEndNode.Size = New System.Drawing.Size(86, 20)
+        Me.txtEndNode.Size = New System.Drawing.Size(159, 20)
         Me.txtEndNode.TabIndex = 3
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(10, 38)
+        Me.Label2.Location = New System.Drawing.Point(11, 120)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(55, 13)
         Me.Label2.TabIndex = 2
@@ -83,15 +89,15 @@ Partial Class frmAddTransformer
         '
         'txtPower
         '
-        Me.txtPower.Location = New System.Drawing.Point(146, 61)
+        Me.txtPower.Location = New System.Drawing.Point(147, 143)
         Me.txtPower.Name = "txtPower"
-        Me.txtPower.Size = New System.Drawing.Size(86, 20)
+        Me.txtPower.Size = New System.Drawing.Size(159, 20)
         Me.txtPower.TabIndex = 5
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(10, 63)
+        Me.Label3.Location = New System.Drawing.Point(11, 145)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(37, 13)
         Me.Label3.TabIndex = 4
@@ -100,7 +106,7 @@ Partial Class frmAddTransformer
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(246, 63)
+        Me.Label4.Location = New System.Drawing.Point(318, 146)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(28, 13)
         Me.Label4.TabIndex = 6
@@ -109,7 +115,7 @@ Partial Class frmAddTransformer
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(246, 88)
+        Me.Label5.Location = New System.Drawing.Point(318, 171)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(14, 13)
         Me.Label5.TabIndex = 9
@@ -117,15 +123,15 @@ Partial Class frmAddTransformer
         '
         'txtPrimaryVoltage
         '
-        Me.txtPrimaryVoltage.Location = New System.Drawing.Point(146, 86)
+        Me.txtPrimaryVoltage.Location = New System.Drawing.Point(147, 168)
         Me.txtPrimaryVoltage.Name = "txtPrimaryVoltage"
-        Me.txtPrimaryVoltage.Size = New System.Drawing.Size(86, 20)
+        Me.txtPrimaryVoltage.Size = New System.Drawing.Size(159, 20)
         Me.txtPrimaryVoltage.TabIndex = 8
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(10, 88)
+        Me.Label6.Location = New System.Drawing.Point(11, 170)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(102, 13)
         Me.Label6.TabIndex = 7
@@ -134,7 +140,7 @@ Partial Class frmAddTransformer
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(246, 114)
+        Me.Label7.Location = New System.Drawing.Point(318, 197)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(14, 13)
         Me.Label7.TabIndex = 12
@@ -142,15 +148,15 @@ Partial Class frmAddTransformer
         '
         'txtSecondaryVoltage
         '
-        Me.txtSecondaryVoltage.Location = New System.Drawing.Point(146, 111)
+        Me.txtSecondaryVoltage.Location = New System.Drawing.Point(147, 193)
         Me.txtSecondaryVoltage.Name = "txtSecondaryVoltage"
-        Me.txtSecondaryVoltage.Size = New System.Drawing.Size(86, 20)
+        Me.txtSecondaryVoltage.Size = New System.Drawing.Size(159, 20)
         Me.txtSecondaryVoltage.TabIndex = 11
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(10, 114)
+        Me.Label8.Location = New System.Drawing.Point(11, 196)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(119, 13)
         Me.Label8.TabIndex = 10
@@ -159,7 +165,7 @@ Partial Class frmAddTransformer
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(246, 139)
+        Me.Label9.Location = New System.Drawing.Point(318, 222)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(15, 13)
         Me.Label9.TabIndex = 15
@@ -167,15 +173,15 @@ Partial Class frmAddTransformer
         '
         'txtPercentageImpedance
         '
-        Me.txtPercentageImpedance.Location = New System.Drawing.Point(146, 136)
+        Me.txtPercentageImpedance.Location = New System.Drawing.Point(147, 218)
         Me.txtPercentageImpedance.Name = "txtPercentageImpedance"
-        Me.txtPercentageImpedance.Size = New System.Drawing.Size(86, 20)
+        Me.txtPercentageImpedance.Size = New System.Drawing.Size(159, 20)
         Me.txtPercentageImpedance.TabIndex = 14
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(10, 139)
+        Me.Label10.Location = New System.Drawing.Point(11, 221)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(117, 13)
         Me.Label10.TabIndex = 13
@@ -183,15 +189,15 @@ Partial Class frmAddTransformer
         '
         'txtPhaseAngle
         '
-        Me.txtPhaseAngle.Location = New System.Drawing.Point(146, 161)
+        Me.txtPhaseAngle.Location = New System.Drawing.Point(147, 243)
         Me.txtPhaseAngle.Name = "txtPhaseAngle"
-        Me.txtPhaseAngle.Size = New System.Drawing.Size(86, 20)
+        Me.txtPhaseAngle.Size = New System.Drawing.Size(159, 20)
         Me.txtPhaseAngle.TabIndex = 17
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(10, 164)
+        Me.Label12.Location = New System.Drawing.Point(11, 246)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(67, 13)
         Me.Label12.TabIndex = 16
@@ -199,15 +205,15 @@ Partial Class frmAddTransformer
         '
         'txtXRRatio
         '
-        Me.txtXRRatio.Location = New System.Drawing.Point(146, 186)
+        Me.txtXRRatio.Location = New System.Drawing.Point(147, 268)
         Me.txtXRRatio.Name = "txtXRRatio"
-        Me.txtXRRatio.Size = New System.Drawing.Size(86, 20)
+        Me.txtXRRatio.Size = New System.Drawing.Size(159, 20)
         Me.txtXRRatio.TabIndex = 19
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(10, 189)
+        Me.Label11.Location = New System.Drawing.Point(11, 271)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(55, 13)
         Me.Label11.TabIndex = 18
@@ -216,7 +222,7 @@ Partial Class frmAddTransformer
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(246, 164)
+        Me.Label13.Location = New System.Drawing.Point(318, 247)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(25, 13)
         Me.Label13.TabIndex = 20
@@ -225,7 +231,7 @@ Partial Class frmAddTransformer
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(10, 214)
+        Me.Label14.Location = New System.Drawing.Point(11, 296)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(31, 13)
         Me.Label14.TabIndex = 21
@@ -235,14 +241,14 @@ Partial Class frmAddTransformer
         '
         Me.cmbType.FormattingEnabled = True
         Me.cmbType.Items.AddRange(New Object() {"DY", "YD"})
-        Me.cmbType.Location = New System.Drawing.Point(146, 211)
+        Me.cmbType.Location = New System.Drawing.Point(147, 293)
         Me.cmbType.Name = "cmbType"
-        Me.cmbType.Size = New System.Drawing.Size(86, 21)
+        Me.cmbType.Size = New System.Drawing.Size(159, 21)
         Me.cmbType.TabIndex = 22
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(196, 245)
+        Me.btnAdd.Location = New System.Drawing.Point(273, 333)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(73, 23)
         Me.btnAdd.TabIndex = 23
@@ -251,18 +257,75 @@ Partial Class frmAddTransformer
         '
         'btnLibrary
         '
-        Me.btnLibrary.Location = New System.Drawing.Point(10, 245)
+        Me.btnLibrary.Location = New System.Drawing.Point(11, 333)
         Me.btnLibrary.Name = "btnLibrary"
         Me.btnLibrary.Size = New System.Drawing.Size(86, 23)
         Me.btnLibrary.TabIndex = 24
         Me.btnLibrary.Text = "Browse Library"
         Me.btnLibrary.UseVisualStyleBackColor = True
         '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(146, 38)
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(197, 20)
+        Me.txtDescription.TabIndex = 87
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(11, 40)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(60, 13)
+        Me.Label29.TabIndex = 86
+        Me.Label29.Text = "Description"
+        '
+        'txtTitle
+        '
+        Me.txtTitle.Location = New System.Drawing.Point(146, 12)
+        Me.txtTitle.Name = "txtTitle"
+        Me.txtTitle.Size = New System.Drawing.Size(197, 20)
+        Me.txtTitle.TabIndex = 85
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(11, 15)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(27, 13)
+        Me.Label30.TabIndex = 84
+        Me.Label30.Text = "Title"
+        '
+        'btnAddToLibrary
+        '
+        Me.btnAddToLibrary.Location = New System.Drawing.Point(103, 333)
+        Me.btnAddToLibrary.Name = "btnAddToLibrary"
+        Me.btnAddToLibrary.Size = New System.Drawing.Size(104, 23)
+        Me.btnAddToLibrary.TabIndex = 89
+        Me.btnAddToLibrary.Text = "Add To Library"
+        Me.btnAddToLibrary.UseVisualStyleBackColor = True
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label31.Location = New System.Drawing.Point(11, 71)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(71, 15)
+        Me.Label31.TabIndex = 88
+        Me.Label31.Text = "Parameters"
+        '
         'frmAddTransformer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(285, 276)
+        Me.ClientSize = New System.Drawing.Size(357, 367)
+        Me.Controls.Add(Me.btnAddToLibrary)
+        Me.Controls.Add(Me.Label31)
+        Me.Controls.Add(Me.txtDescription)
+        Me.Controls.Add(Me.Label29)
+        Me.Controls.Add(Me.txtTitle)
+        Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.btnLibrary)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.cmbType)
@@ -293,7 +356,7 @@ Partial Class frmAddTransformer
         Me.MinimizeBox = False
         Me.Name = "frmAddTransformer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Add Transformer"
+        Me.Text = "Transformer Editor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -324,4 +387,10 @@ Partial Class frmAddTransformer
     Friend WithEvents cmbType As ComboBox
     Friend WithEvents btnAdd As Button
     Friend WithEvents btnLibrary As Button
+    Friend WithEvents txtDescription As TextBox
+    Friend WithEvents Label29 As Label
+    Friend WithEvents txtTitle As TextBox
+    Friend WithEvents Label30 As Label
+    Friend WithEvents btnAddToLibrary As Button
+    Friend WithEvents Label31 As Label
 End Class
