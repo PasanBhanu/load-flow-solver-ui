@@ -134,6 +134,7 @@ Public Class Line
             COMMAND.Parameters.AddWithValue("l_3n", L_3N)
             READER = COMMAND.ExecuteReader
             con.Close()
+            frmMain.addLog("Model saved to database", Color.Green)
         Catch ex As Exception
             frmMain.addLog(ex.Message, Color.Red)
             con.Dispose()
@@ -170,6 +171,7 @@ Public Class Line
             COMMAND.Parameters.AddWithValue("dbID", dbID)
             READER = COMMAND.ExecuteReader
             con.Close()
+            frmMain.addLog("Model parameters updated", Color.Green)
         Catch ex As Exception
             frmMain.addLog(ex.Message, Color.Red)
             con.Dispose()

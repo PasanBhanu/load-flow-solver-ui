@@ -23,6 +23,8 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Program Initiated")
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Database Connected")
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -85,12 +87,12 @@ Partial Class frmMain
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.panViewer = New System.Windows.Forms.Panel()
+        Me.viewer = New Microsoft.Glee.GraphViewerGdi.GViewer()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.listLog = New System.Windows.Forms.ListBox()
         Me.btnCalculate = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.viewer = New Microsoft.Glee.GraphViewerGdi.GViewer()
+        Me.listLog = New System.Windows.Forms.ListView()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.tabEdges.SuspendLayout()
@@ -101,7 +103,7 @@ Partial Class frmMain
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 619)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 627)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 12, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(1090, 22)
@@ -627,45 +629,6 @@ Partial Class frmMain
         Me.panViewer.Size = New System.Drawing.Size(387, 449)
         Me.panViewer.TabIndex = 5
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label3.Location = New System.Drawing.Point(14, 507)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(27, 15)
-        Me.Label3.TabIndex = 6
-        Me.Label3.Text = "Log"
-        '
-        'listLog
-        '
-        Me.listLog.FormattingEnabled = True
-        Me.listLog.Items.AddRange(New Object() {"Program Initialised", "Database Loaded"})
-        Me.listLog.Location = New System.Drawing.Point(12, 527)
-        Me.listLog.Name = "listLog"
-        Me.listLog.ScrollAlwaysVisible = True
-        Me.listLog.Size = New System.Drawing.Size(1068, 82)
-        Me.listLog.TabIndex = 7
-        '
-        'btnCalculate
-        '
-        Me.btnCalculate.Location = New System.Drawing.Point(608, 484)
-        Me.btnCalculate.Name = "btnCalculate"
-        Me.btnCalculate.Size = New System.Drawing.Size(75, 23)
-        Me.btnCalculate.TabIndex = 8
-        Me.btnCalculate.Text = "Calculate"
-        Me.btnCalculate.UseVisualStyleBackColor = True
-        '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.Filter = "LF Project Files (*.lfproj*)|*.lfproj|Excel Files (*.xlsx)|*.xlsx"
-        '
-        'SaveFileDialog1
-        '
-        Me.SaveFileDialog1.DefaultExt = "lfproj"
-        Me.SaveFileDialog1.Filter = "LF Project Files (*.lfproj*)|*.lfproj|Excel Files (*.xlsx)|*.xlsx"
-        Me.SaveFileDialog1.Title = "Save Project As"
-        '
         'viewer
         '
         Me.viewer.AsyncLayout = False
@@ -686,13 +649,53 @@ Partial Class frmMain
         Me.viewer.ZoomFraction = 0.5R
         Me.viewer.ZoomWindowThreshold = 0.05R
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label3.Location = New System.Drawing.Point(14, 507)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(27, 15)
+        Me.Label3.TabIndex = 6
+        Me.Label3.Text = "Log"
+        '
+        'btnCalculate
+        '
+        Me.btnCalculate.Location = New System.Drawing.Point(608, 484)
+        Me.btnCalculate.Name = "btnCalculate"
+        Me.btnCalculate.Size = New System.Drawing.Size(75, 23)
+        Me.btnCalculate.TabIndex = 8
+        Me.btnCalculate.Text = "Calculate"
+        Me.btnCalculate.UseVisualStyleBackColor = True
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.Filter = "LF Project Files (*.lfproj*)|*.lfproj|Excel Files (*.xlsx)|*.xlsx"
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "lfproj"
+        Me.SaveFileDialog1.Filter = "LF Project Files (*.lfproj*)|*.lfproj|Excel Files (*.xlsx)|*.xlsx"
+        Me.SaveFileDialog1.Title = "Save Project As"
+        '
+        'listLog
+        '
+        Me.listLog.HideSelection = False
+        Me.listLog.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2})
+        Me.listLog.Location = New System.Drawing.Point(11, 532)
+        Me.listLog.Name = "listLog"
+        Me.listLog.Size = New System.Drawing.Size(1069, 84)
+        Me.listLog.TabIndex = 9
+        Me.listLog.UseCompatibleStateImageBehavior = False
+        Me.listLog.View = System.Windows.Forms.View.List
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1090, 641)
-        Me.Controls.Add(Me.btnCalculate)
+        Me.ClientSize = New System.Drawing.Size(1090, 649)
         Me.Controls.Add(Me.listLog)
+        Me.Controls.Add(Me.btnCalculate)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.panViewer)
         Me.Controls.Add(Me.Label2)
@@ -739,7 +742,6 @@ Partial Class frmMain
     Friend WithEvents Label2 As Label
     Friend WithEvents panViewer As Panel
     Friend WithEvents Label3 As Label
-    Friend WithEvents listLog As ListBox
     Friend WithEvents btnCalculate As Button
     Friend WithEvents tabResults As TabPage
     Friend WithEvents btnAddLine As Button
@@ -791,4 +793,5 @@ Partial Class frmMain
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents ColumnHeader4 As ColumnHeader
     Friend WithEvents viewer As Microsoft.Glee.GraphViewerGdi.GViewer
+    Friend WithEvents listLog As ListView
 End Class

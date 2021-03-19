@@ -40,6 +40,8 @@
         txtDescription.Text = line.description
         txtStartNode.Text = line.startNode
         txtEndNode.Text = line.endNode
+        cmbPhases.Text = line.phases
+        chkNeutral.Checked = line.isNeutralAvailable
         txtResistance_P.Text = line.resistance_p
         txtGmr_P.Text = line.gmr_p
         txtResistance_N.Text = line.resistance_n
@@ -48,8 +50,6 @@
         txtFrequency.Text = line.frequency
         txtSoilResistivity.Text = line.soilResistivity
         cmbType.Text = line.type
-        cmbPhases.Text = line.phases
-        chkNeutral.Checked = line.isNeutralAvailable
         txt12.Text = line.L_12
         txt13.Text = line.L_13
         txt23.Text = line.L_23
@@ -57,6 +57,61 @@
         txt2n.Text = line.L_2N
         txt3n.Text = line.L_3N
         line.isValid = False
+
+        If chkNeutral.CheckState = CheckState.Checked Then
+            If cmbPhases.Text = 3 Then
+                txt1n.Enabled = True
+                txt2n.Enabled = True
+                txt3n.Enabled = True
+            ElseIf cmbPhases.Text = 2 Then
+                txt1n.Enabled = True
+                txt2n.Enabled = True
+            Else
+                txt1n.Enabled = True
+            End If
+            txtGmr_N.Enabled = True
+            txtResistance_N.Enabled = True
+        Else
+            txt1n.Enabled = False
+            txt2n.Enabled = False
+            txt3n.Enabled = False
+            txtGmr_N.Enabled = False
+            txtResistance_N.Enabled = False
+        End If
+
+        If cmbPhases.Text = 3 Then
+            txt12.Enabled = True
+            txt13.Enabled = True
+            txt23.Enabled = True
+        ElseIf cmbPhases.Text = 2 Then
+            txt12.Enabled = True
+            txt13.Enabled = False
+            txt23.Enabled = False
+        Else
+            txt12.Enabled = False
+            txt13.Enabled = False
+            txt23.Enabled = False
+        End If
+
+        If chkNeutral.CheckState = CheckState.Checked Then
+            If cmbPhases.Text = 3 Then
+                txt1n.Enabled = True
+                txt2n.Enabled = True
+                txt3n.Enabled = True
+            ElseIf cmbPhases.Text = 2 Then
+                txt1n.Enabled = True
+                txt2n.Enabled = True
+                txt3n.Enabled = False
+            Else
+                txt1n.Enabled = True
+                txt2n.Enabled = False
+                txt3n.Enabled = False
+            End If
+        Else
+            txt1n.Enabled = False
+            txt2n.Enabled = False
+            txt3n.Enabled = False
+        End If
     End Function
 
     Private Sub validate()
@@ -112,6 +167,14 @@
             If txtEndNode.Text.Trim = 0 Then
                 line.isValid = False
                 MsgBox("You cannot select 0 as Node ID. Please select number above 0.", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
+                Exit Sub
+            End If
+        End If
+
+        If txtStartNode.Text <> "NA" And txtEndNode.Text <> "NA" Then
+            If txtStartNode.Text.Trim = txtEndNode.Text.Trim Then
+                line.isValid = False
+                MsgBox("Start node and end note cannot be same.", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
                 Exit Sub
             End If
         End If
@@ -197,6 +260,17 @@
 
     End Sub
 
+    Private Sub btnAddToLibrary_Click(sender As Object, e As EventArgs) Handles btnAddToLibrary.Click
+        Dim data = frmModelName.ShowDialog(True)
+        If data(0) <> "" And data(1) <> "" Then
+            Dim _line = line
+            _line.title = data(0)
+            _line.description = data(1)
+            _line.addToDatabase()
+            MsgBox("Model successfully saved to database", MsgBoxStyle.Information, "Distribution LoadFlow Analysis Software")
+        End If
+    End Sub
+
     Private Sub chkNeutral_CheckedChanged(sender As Object, e As EventArgs) Handles chkNeutral.CheckedChanged
         If chkNeutral.CheckState = CheckState.Checked Then
             If cmbPhases.Text = 3 Then
@@ -277,8 +351,8 @@
         End If
     End Sub
 
-    ' *** GUI Enhancements ***
 
+    ' *** GUI Enhancements ***
     Private Sub txtEndNode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEndNode.KeyPress
         Dim txt As TextBox = CType(sender, TextBox)
         If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
@@ -381,6 +455,5 @@
         If e.KeyChar = Chr(8) Then e.Handled = False
         If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
     End Sub
-
 
 End Class
