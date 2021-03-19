@@ -23,7 +23,6 @@ Partial Class frmLoadBrowser
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.btnSearch = New System.Windows.Forms.Button()
-        Me.cmbType = New System.Windows.Forms.ComboBox()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.listModels = New System.Windows.Forms.ListView()
@@ -32,6 +31,7 @@ Partial Class frmLoadBrowser
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
+        Me.cmbType = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'btnSearch
@@ -42,16 +42,6 @@ Partial Class frmLoadBrowser
         Me.btnSearch.TabIndex = 18
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
-        '
-        'cmbType
-        '
-        Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"All", "Loads", "Capacitor Banks", "Distributed Generators", "Transmission Lines", "Transformers"})
-        Me.cmbType.Location = New System.Drawing.Point(456, 14)
-        Me.cmbType.Name = "cmbType"
-        Me.cmbType.Size = New System.Drawing.Size(133, 21)
-        Me.cmbType.TabIndex = 17
         '
         'txtSearch
         '
@@ -116,6 +106,17 @@ Partial Class frmLoadBrowser
         Me.btnSelect.Text = "Select"
         Me.btnSelect.UseVisualStyleBackColor = True
         '
+        'cmbType
+        '
+        Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbType.Enabled = False
+        Me.cmbType.FormattingEnabled = True
+        Me.cmbType.Items.AddRange(New Object() {"All", "Loads", "Capacitor Banks", "Distributed Generators", "Transmission Lines", "Transformers"})
+        Me.cmbType.Location = New System.Drawing.Point(456, 14)
+        Me.cmbType.Name = "cmbType"
+        Me.cmbType.Size = New System.Drawing.Size(133, 21)
+        Me.cmbType.TabIndex = 17
+        '
         'frmLoadBrowser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -139,7 +140,6 @@ Partial Class frmLoadBrowser
     End Sub
 
     Friend WithEvents btnSearch As Button
-    Friend WithEvents cmbType As ComboBox
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents listModels As ListView
@@ -148,4 +148,5 @@ Partial Class frmLoadBrowser
     Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents btnSelect As Button
+    Friend WithEvents cmbType As ComboBox
 End Class
