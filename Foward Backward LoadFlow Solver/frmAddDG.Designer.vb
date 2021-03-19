@@ -49,12 +49,18 @@ Partial Class frmAddDG
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtNode = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.txtTitle = New System.Windows.Forms.TextBox()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.btnAddToLibrary = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(237, 88)
+        Me.Label8.Location = New System.Drawing.Point(239, 166)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(13, 13)
         Me.Label8.TabIndex = 93
@@ -64,7 +70,7 @@ Partial Class frmAddDG
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(237, 38)
+        Me.Label10.Location = New System.Drawing.Point(239, 116)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(13, 13)
         Me.Label10.TabIndex = 92
@@ -74,7 +80,7 @@ Partial Class frmAddDG
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(237, 63)
+        Me.Label11.Location = New System.Drawing.Point(239, 141)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(13, 13)
         Me.Label11.TabIndex = 91
@@ -83,28 +89,28 @@ Partial Class frmAddDG
         '
         'txtPowerC_I
         '
-        Me.txtPowerC_I.Location = New System.Drawing.Point(255, 86)
+        Me.txtPowerC_I.Location = New System.Drawing.Point(257, 164)
         Me.txtPowerC_I.Name = "txtPowerC_I"
         Me.txtPowerC_I.Size = New System.Drawing.Size(86, 20)
         Me.txtPowerC_I.TabIndex = 90
         '
         'txtPowerB_I
         '
-        Me.txtPowerB_I.Location = New System.Drawing.Point(255, 61)
+        Me.txtPowerB_I.Location = New System.Drawing.Point(257, 139)
         Me.txtPowerB_I.Name = "txtPowerB_I"
         Me.txtPowerB_I.Size = New System.Drawing.Size(86, 20)
         Me.txtPowerB_I.TabIndex = 89
         '
         'txtPowerA_I
         '
-        Me.txtPowerA_I.Location = New System.Drawing.Point(255, 36)
+        Me.txtPowerA_I.Location = New System.Drawing.Point(257, 114)
         Me.txtPowerA_I.Name = "txtPowerA_I"
         Me.txtPowerA_I.Size = New System.Drawing.Size(86, 20)
         Me.txtPowerA_I.TabIndex = 88
         '
         'txtPfC
         '
-        Me.txtPfC.Location = New System.Drawing.Point(146, 161)
+        Me.txtPfC.Location = New System.Drawing.Point(148, 239)
         Me.txtPfC.Name = "txtPfC"
         Me.txtPfC.Size = New System.Drawing.Size(86, 20)
         Me.txtPfC.TabIndex = 87
@@ -112,7 +118,7 @@ Partial Class frmAddDG
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(10, 164)
+        Me.Label9.Location = New System.Drawing.Point(12, 242)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(119, 13)
         Me.Label9.TabIndex = 86
@@ -120,7 +126,7 @@ Partial Class frmAddDG
         '
         'txtPfB
         '
-        Me.txtPfB.Location = New System.Drawing.Point(146, 136)
+        Me.txtPfB.Location = New System.Drawing.Point(148, 214)
         Me.txtPfB.Name = "txtPfB"
         Me.txtPfB.Size = New System.Drawing.Size(86, 20)
         Me.txtPfB.TabIndex = 85
@@ -128,7 +134,7 @@ Partial Class frmAddDG
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(10, 139)
+        Me.Label12.Location = New System.Drawing.Point(12, 217)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(119, 13)
         Me.Label12.TabIndex = 84
@@ -136,7 +142,7 @@ Partial Class frmAddDG
         '
         'txtPfA
         '
-        Me.txtPfA.Location = New System.Drawing.Point(146, 111)
+        Me.txtPfA.Location = New System.Drawing.Point(148, 189)
         Me.txtPfA.Name = "txtPfA"
         Me.txtPfA.Size = New System.Drawing.Size(86, 20)
         Me.txtPfA.TabIndex = 83
@@ -144,7 +150,7 @@ Partial Class frmAddDG
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(10, 114)
+        Me.Label13.Location = New System.Drawing.Point(12, 192)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(119, 13)
         Me.Label13.TabIndex = 82
@@ -154,7 +160,7 @@ Partial Class frmAddDG
         '
         Me.cmbConnection.FormattingEnabled = True
         Me.cmbConnection.Items.AddRange(New Object() {"Star", "Delta"})
-        Me.cmbConnection.Location = New System.Drawing.Point(146, 186)
+        Me.cmbConnection.Location = New System.Drawing.Point(148, 264)
         Me.cmbConnection.Name = "cmbConnection"
         Me.cmbConnection.Size = New System.Drawing.Size(86, 21)
         Me.cmbConnection.TabIndex = 81
@@ -162,7 +168,7 @@ Partial Class frmAddDG
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(10, 189)
+        Me.Label14.Location = New System.Drawing.Point(12, 267)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(61, 13)
         Me.Label14.TabIndex = 80
@@ -171,7 +177,7 @@ Partial Class frmAddDG
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(345, 88)
+        Me.Label6.Location = New System.Drawing.Point(347, 166)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(38, 13)
         Me.Label6.TabIndex = 79
@@ -179,7 +185,7 @@ Partial Class frmAddDG
         '
         'txtPowerC_R
         '
-        Me.txtPowerC_R.Location = New System.Drawing.Point(146, 86)
+        Me.txtPowerC_R.Location = New System.Drawing.Point(148, 164)
         Me.txtPowerC_R.Name = "txtPowerC_R"
         Me.txtPowerC_R.Size = New System.Drawing.Size(86, 20)
         Me.txtPowerC_R.TabIndex = 78
@@ -187,7 +193,7 @@ Partial Class frmAddDG
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(10, 88)
+        Me.Label7.Location = New System.Drawing.Point(12, 166)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(86, 13)
         Me.Label7.TabIndex = 77
@@ -196,7 +202,7 @@ Partial Class frmAddDG
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(345, 38)
+        Me.Label4.Location = New System.Drawing.Point(347, 116)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(38, 13)
         Me.Label4.TabIndex = 76
@@ -205,7 +211,7 @@ Partial Class frmAddDG
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(345, 63)
+        Me.Label5.Location = New System.Drawing.Point(347, 141)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(38, 13)
         Me.Label5.TabIndex = 75
@@ -213,7 +219,7 @@ Partial Class frmAddDG
         '
         'txtPowerB_R
         '
-        Me.txtPowerB_R.Location = New System.Drawing.Point(146, 61)
+        Me.txtPowerB_R.Location = New System.Drawing.Point(148, 139)
         Me.txtPowerB_R.Name = "txtPowerB_R"
         Me.txtPowerB_R.Size = New System.Drawing.Size(86, 20)
         Me.txtPowerB_R.TabIndex = 74
@@ -221,7 +227,7 @@ Partial Class frmAddDG
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(10, 63)
+        Me.Label3.Location = New System.Drawing.Point(12, 141)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(86, 13)
         Me.Label3.TabIndex = 73
@@ -229,7 +235,7 @@ Partial Class frmAddDG
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(305, 223)
+        Me.btnAdd.Location = New System.Drawing.Point(307, 301)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 72
@@ -238,7 +244,7 @@ Partial Class frmAddDG
         '
         'btnLibrary
         '
-        Me.btnLibrary.Location = New System.Drawing.Point(10, 223)
+        Me.btnLibrary.Location = New System.Drawing.Point(12, 301)
         Me.btnLibrary.Name = "btnLibrary"
         Me.btnLibrary.Size = New System.Drawing.Size(98, 23)
         Me.btnLibrary.TabIndex = 71
@@ -247,7 +253,7 @@ Partial Class frmAddDG
         '
         'txtPowerA_R
         '
-        Me.txtPowerA_R.Location = New System.Drawing.Point(146, 36)
+        Me.txtPowerA_R.Location = New System.Drawing.Point(148, 114)
         Me.txtPowerA_R.Name = "txtPowerA_R"
         Me.txtPowerA_R.Size = New System.Drawing.Size(86, 20)
         Me.txtPowerA_R.TabIndex = 70
@@ -255,7 +261,7 @@ Partial Class frmAddDG
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(10, 38)
+        Me.Label2.Location = New System.Drawing.Point(12, 116)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(86, 13)
         Me.Label2.TabIndex = 69
@@ -263,7 +269,7 @@ Partial Class frmAddDG
         '
         'txtNode
         '
-        Me.txtNode.Location = New System.Drawing.Point(146, 10)
+        Me.txtNode.Location = New System.Drawing.Point(148, 88)
         Me.txtNode.Name = "txtNode"
         Me.txtNode.Size = New System.Drawing.Size(86, 20)
         Me.txtNode.TabIndex = 68
@@ -271,17 +277,74 @@ Partial Class frmAddDG
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(10, 13)
+        Me.Label1.Location = New System.Drawing.Point(12, 91)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(88, 13)
         Me.Label1.TabIndex = 67
         Me.Label1.Text = "Connected Node"
         '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label31.Location = New System.Drawing.Point(12, 70)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(71, 15)
+        Me.Label31.TabIndex = 98
+        Me.Label31.Text = "Parameters"
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(147, 39)
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(233, 20)
+        Me.txtDescription.TabIndex = 97
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(12, 41)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(60, 13)
+        Me.Label29.TabIndex = 96
+        Me.Label29.Text = "Description"
+        '
+        'txtTitle
+        '
+        Me.txtTitle.Location = New System.Drawing.Point(147, 13)
+        Me.txtTitle.Name = "txtTitle"
+        Me.txtTitle.Size = New System.Drawing.Size(233, 20)
+        Me.txtTitle.TabIndex = 95
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(12, 16)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(27, 13)
+        Me.Label30.TabIndex = 94
+        Me.Label30.Text = "Title"
+        '
+        'btnAddToLibrary
+        '
+        Me.btnAddToLibrary.Location = New System.Drawing.Point(116, 301)
+        Me.btnAddToLibrary.Name = "btnAddToLibrary"
+        Me.btnAddToLibrary.Size = New System.Drawing.Size(104, 23)
+        Me.btnAddToLibrary.TabIndex = 99
+        Me.btnAddToLibrary.Text = "Add To Library"
+        Me.btnAddToLibrary.UseVisualStyleBackColor = True
+        '
         'frmAddDG
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(391, 256)
+        Me.ClientSize = New System.Drawing.Size(395, 336)
+        Me.Controls.Add(Me.btnAddToLibrary)
+        Me.Controls.Add(Me.Label31)
+        Me.Controls.Add(Me.txtDescription)
+        Me.Controls.Add(Me.Label29)
+        Me.Controls.Add(Me.txtTitle)
+        Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label11)
@@ -314,7 +377,7 @@ Partial Class frmAddDG
         Me.MinimizeBox = False
         Me.Name = "frmAddDG"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Distributed Generator Editor"
+        Me.Text = "Distributed Generator Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -347,4 +410,10 @@ Partial Class frmAddDG
     Friend WithEvents Label2 As Label
     Friend WithEvents txtNode As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents Label31 As Label
+    Friend WithEvents txtDescription As TextBox
+    Friend WithEvents Label29 As Label
+    Friend WithEvents txtTitle As TextBox
+    Friend WithEvents Label30 As Label
+    Friend WithEvents btnAddToLibrary As Button
 End Class

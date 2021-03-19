@@ -65,7 +65,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnAddLoad_Click(sender As Object, e As EventArgs) Handles btnAddLoad.Click
-        Dim load = frmAddLoad.ShowDialog(overloaded:=True, New Load)
+        Dim load = frmAddLoad.ShowDialog(isEditor:=True, New Load)
 
         If load.isValid Then
 
@@ -88,7 +88,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnAddCapacitor_Click(sender As Object, e As EventArgs) Handles btnAddCapacitor.Click
-        Dim capacitor = frmAddShuntCapacitor.ShowDialog(overloaded:=True, New ShuntCapacitor)
+        Dim capacitor = frmAddShuntCapacitor.ShowDialog(isEditor:=True, New ShuntCapacitor)
 
         If capacitor.isValid Then
 
@@ -111,7 +111,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnAddDg_Click(sender As Object, e As EventArgs) Handles btnAddDg.Click
-        Dim generator = frmAddDG.ShowDialog(overloaded:=True, New DG)
+        Dim generator = frmAddDG.ShowDialog(isEditor:=True, New DG)
 
         If generator.isValid Then
 
@@ -824,7 +824,7 @@ Public Class frmMain
             If Project.loads.TryGetValue(loadId, result) Then
                 If result IsNot Nothing Then
                     If result.GetType() Is GetType(Load) Then
-                        Dim load = frmAddLoad.ShowDialog(overloaded:=True, result)
+                        Dim load = frmAddLoad.ShowDialog(isEditor:=True, result)
 
                         If load.isValid Then
 
@@ -838,7 +838,7 @@ Public Class frmMain
                             createGraph()
                         End If
                     ElseIf result.GetType() Is GetType(ShuntCapacitor) Then
-                        Dim capacitor = frmAddShuntCapacitor.ShowDialog(overloaded:=True, result)
+                        Dim capacitor = frmAddShuntCapacitor.ShowDialog(isEditor:=True, result)
 
                         If capacitor.isValid Then
 
@@ -852,7 +852,7 @@ Public Class frmMain
                             createGraph()
                         End If
                     ElseIf result.GetType() Is GetType(DG) Then
-                        Dim generator = frmAddDG.ShowDialog(overloaded:=True, result)
+                        Dim generator = frmAddDG.ShowDialog(isEditor:=True, result)
 
                         If generator.isValid Then
 

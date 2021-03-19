@@ -115,7 +115,7 @@ Public Class Load
 
         Try
             con.Open()
-            COMMAND = New OleDb.OleDbCommand("UPDATE lines SET title=@title, description=@description, powerA_R=@powerA_R, powerA_I=@powerA_I, powerB_R=@powerB_R, powerB_I=@powerB_I, powerC_R=@powerC_R, powerC_I=@powerC_I, cpq=@cpq, cc=@cc, ci=@ci WHERE ID=@dbID", con)
+            COMMAND = New OleDb.OleDbCommand("UPDATE loads SET title=@title, description=@description, powerA_R=@powerA_R, powerA_I=@powerA_I, powerB_R=@powerB_R, powerB_I=@powerB_I, powerC_R=@powerC_R, powerC_I=@powerC_I, cpq=@cpq, cc=@cc, ci=@ci WHERE ID=@dbID", con)
             COMMAND.Parameters.AddWithValue("title", title)
             COMMAND.Parameters.AddWithValue("description", description)
             COMMAND.Parameters.AddWithValue("powerA_R", powerA.Real.ToString)

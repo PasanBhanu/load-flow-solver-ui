@@ -120,7 +120,6 @@
             End If
         End If
 
-
         If transformer.isValid = False Then
             MsgBox("Please fill all the required parameters", MsgBoxStyle.Exclamation, "Distribution LoadFlow Analysis Software")
         End If

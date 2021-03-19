@@ -159,18 +159,18 @@ Partial Class frmAddLine
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(245, 156)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(29, 13)
+        Me.Label5.Size = New System.Drawing.Size(48, 13)
         Me.Label5.TabIndex = 30
-        Me.Label5.Text = "Ohm"
+        Me.Label5.Text = "Ohm/km"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(245, 181)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(13, 13)
+        Me.Label6.Size = New System.Drawing.Size(15, 13)
         Me.Label6.TabIndex = 31
-        Me.Label6.Text = "ft"
+        Me.Label6.Text = "m"
         '
         'cmbType
         '
@@ -232,9 +232,9 @@ Partial Class frmAddLine
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(245, 207)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(25, 13)
+        Me.Label9.Size = New System.Drawing.Size(21, 13)
         Me.Label9.TabIndex = 40
-        Me.Label9.Text = "mile"
+        Me.Label9.Text = "km"
         '
         'txtLength
         '
@@ -266,9 +266,9 @@ Partial Class frmAddLine
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(245, 383)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(37, 13)
+        Me.Label11.Size = New System.Drawing.Size(40, 13)
         Me.Label11.TabIndex = 47
-        Me.Label11.Text = "Ohmm"
+        Me.Label11.Text = "Ohm m"
         '
         'txtSoilResistivity
         '
@@ -345,9 +345,9 @@ Partial Class frmAddLine
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label18.Location = New System.Drawing.Point(320, 81)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(97, 15)
+        Me.Label18.Size = New System.Drawing.Size(98, 15)
         Me.Label18.TabIndex = 51
-        Me.Label18.Text = "Line Spacing (ft)"
+        Me.Label18.Text = "Line Spacing (m)"
         '
         'Label19
         '
@@ -540,18 +540,18 @@ Partial Class frmAddLine
         Me.Label25.AutoSize = True
         Me.Label25.Location = New System.Drawing.Point(245, 332)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(13, 13)
+        Me.Label25.Size = New System.Drawing.Size(15, 13)
         Me.Label25.TabIndex = 78
-        Me.Label25.Text = "ft"
+        Me.Label25.Text = "m"
         '
         'Label26
         '
         Me.Label26.AutoSize = True
         Me.Label26.Location = New System.Drawing.Point(245, 307)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(29, 13)
+        Me.Label26.Size = New System.Drawing.Size(48, 13)
         Me.Label26.TabIndex = 77
-        Me.Label26.Text = "Ohm"
+        Me.Label26.Text = "Ohm/km"
         '
         'txtGmr_N
         '
@@ -717,7 +717,7 @@ Partial Class frmAddLine
         Me.MinimizeBox = False
         Me.Name = "frmAddLine"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Transmission Line Editor"
+        Me.Text = "Transmission Line Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

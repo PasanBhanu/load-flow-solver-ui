@@ -356,7 +356,7 @@ Partial Class frmAddTransformer
         Me.MinimizeBox = False
         Me.Name = "frmAddTransformer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Transformer Editor"
+        Me.Text = "Transformer Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

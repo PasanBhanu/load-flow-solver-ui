@@ -153,19 +153,19 @@
                     loadTable()
                 End If
             ElseIf listModels.FocusedItem.SubItems(1).Text = "Capacitor Banks" Then
-                'Dim result As New ShuntCapacitor(dbID)
-                'Dim capacitor = frmAddShuntCapacitor.ShowDialog(False, result)
-                'If capacitor.isValid Then
-                'capacitor.updateDatabase()
-                'loadTable()
-                'End If
+                Dim result As New ShuntCapacitor(dbID)
+                Dim capacitor = frmAddShuntCapacitor.ShowDialog(False, result)
+                If capacitor.isValid Then
+                    capacitor.updateDatabase()
+                    loadTable()
+                End If
             ElseIf listModels.FocusedItem.SubItems(1).Text = "Distributed Generators" Then
-                'Dim result As New DG(dbID)
-                'Dim generator = frmAddDG.ShowDialog(False, result)
-                'If generator.isValid Then
-                'generator.updateDatabase()
-                'loadTable()
-                'End If
+                Dim result As New DG(dbID)
+                Dim generator = frmAddDG.ShowDialog(False, result)
+                If generator.isValid Then
+                    generator.updateDatabase()
+                    loadTable()
+                End If
             End If
         End If
     End Sub
@@ -243,7 +243,7 @@
     Private Sub btnAddCapacitor_Click(sender As Object, e As EventArgs) Handles btnAddCapacitor.Click
         Dim capacitor = frmAddShuntCapacitor.ShowDialog(False, New ShuntCapacitor)
         If capacitor.isValid Then
-            'capacitor.addToDatabase()
+            capacitor.addToDatabase()
             loadTable()
         End If
     End Sub
@@ -251,7 +251,7 @@
     Private Sub btnAddGenerator_Click(sender As Object, e As EventArgs) Handles btnAddGenerator.Click
         Dim generator = frmAddDG.ShowDialog(False, New DG)
         If generator.isValid Then
-            'generator.addToDatabase()
+            generator.addToDatabase()
             loadTable()
         End If
     End Sub

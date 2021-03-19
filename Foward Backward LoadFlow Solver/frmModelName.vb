@@ -3,6 +3,8 @@
     Private data(2) As String
 
     Public Overloads Function ShowDialog(ByVal overloaded As Boolean) As String()
+        txtDescription.Clear()
+        txtTitle.Clear()
         Me.ShowDialog()
         Return data
     End Function
