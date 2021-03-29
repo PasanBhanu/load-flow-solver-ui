@@ -144,11 +144,11 @@ Public Class frmMain
     End Sub
 
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
-        OpenFileDialog1.Title = "Open Project"
+        ofdProject.Title = "Open Project"
 
-        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+        If ofdProject.ShowDialog() = DialogResult.OK Then
 
-            Dim path As String = OpenFileDialog1.FileName
+            Dim path As String = ofdProject.FileName
 
             If path <> "" Then
 
@@ -162,8 +162,8 @@ Public Class frmMain
                     ElseIf result = DialogResult.Yes Then
                         If validateData() Then
                             If Project.filePath Is Nothing Then
-                                If SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-                                    Project.filePath = SaveFileDialog1.FileName
+                                If sfdProject.ShowDialog = Windows.Forms.DialogResult.OK Then
+                                    Project.filePath = sfdProject.FileName
                                     My.Computer.FileSystem.CopyFile("data.xlsx", Project.filePath)
                                     Me.Text = "Distribution LoadFlow Analysis Software (" + Project.filePath + ")"
                                     saveFile()
@@ -305,6 +305,8 @@ Public Class frmMain
                     txtError.Text = settingsSheet.Cells(1, 2).Value
                     txtIterations.Text = settingsSheet.Cells(2, 2).Value
                     txtRoundFactor.Text = settingsSheet.Cells(3, 2).Value
+                    txtUpperLimit.Text = settingsSheet.Cells(4, 2).Value
+                    txtLowerLimit.Text = settingsSheet.Cells(5, 2).Value
 
                 End Using
 
@@ -319,8 +321,8 @@ Public Class frmMain
 
     Private Sub SaveAsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveAsToolStripMenuItem.Click
         If validateData() Then
-            If SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-                Project.filePath = SaveFileDialog1.FileName
+            If sfdProject.ShowDialog = Windows.Forms.DialogResult.OK Then
+                Project.filePath = sfdProject.FileName
                 My.Computer.FileSystem.CopyFile("data.xlsx", Project.filePath)
                 Me.Text = "Distribution LoadFlow Analysis Software (" + Project.filePath + ")"
                 saveFile()
@@ -331,8 +333,8 @@ Public Class frmMain
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
         If validateData() Then
             If Project.filePath Is Nothing Then
-                If SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-                    Project.filePath = SaveFileDialog1.FileName
+                If sfdProject.ShowDialog = Windows.Forms.DialogResult.OK Then
+                    Project.filePath = sfdProject.FileName
                     My.Computer.FileSystem.CopyFile("data.xlsx", Project.filePath)
                     Me.Text = "Distribution LoadFlow Analysis Software (" + Project.filePath + ")"
                     saveFile()
@@ -354,8 +356,8 @@ Public Class frmMain
             ElseIf result = DialogResult.Yes Then
                 If validateData() Then
                     If Project.filePath Is Nothing Then
-                        If SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-                            Project.filePath = SaveFileDialog1.FileName
+                        If sfdProject.ShowDialog = Windows.Forms.DialogResult.OK Then
+                            Project.filePath = sfdProject.FileName
                             My.Computer.FileSystem.CopyFile("data.xlsx", Project.filePath)
                             Me.Text = "Distribution LoadFlow Analysis Software (" + Project.filePath + ")"
                             saveFile()
@@ -384,6 +386,8 @@ Public Class frmMain
         txtRoundFactor.Text = 3
         txtPower.Text = 100
         txtVoltage_R.Text = 400
+        txtLowerLimit.Text = 0.05
+        txtUpperLimit.Text = 0.05
         Me.Text = "Distribution LoadFlow Analysis Software"
 
         createGraph()
@@ -404,8 +408,8 @@ Public Class frmMain
             ElseIf result = DialogResult.Yes Then
                 If validateData() Then
                     If Project.filePath Is Nothing Then
-                        If SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-                            Project.filePath = SaveFileDialog1.FileName
+                        If sfdProject.ShowDialog = Windows.Forms.DialogResult.OK Then
+                            Project.filePath = sfdProject.FileName
                             My.Computer.FileSystem.CopyFile("data.xlsx", Project.filePath)
                             Me.Text = "Distribution LoadFlow Analysis Software (" + Project.filePath + ")"
                             saveFile()
@@ -574,6 +578,8 @@ Public Class frmMain
             settingsSheet.Cells(1, 2).Value = Convert.ToDouble(txtError.Text)
             settingsSheet.Cells(2, 2).Value = Convert.ToDouble(txtIterations.Text)
             settingsSheet.Cells(3, 2).Value = Convert.ToDouble(txtRoundFactor.Text)
+            settingsSheet.Cells(4, 2).Value = Convert.ToDouble(txtUpperLimit.Text)
+            settingsSheet.Cells(5, 2).Value = Convert.ToDouble(txtLowerLimit.Text)
 
             package.Save()
 
@@ -663,115 +669,144 @@ Public Class frmMain
             Return False
         End If
 
+        If txtUpperLimit.Text = "" Or txtLowerLimit.Text = "" Then
+            MsgBox("Invalid violation check setting! Please check and retry", MsgBoxStyle.Information, "Distribution LoadFlow Analysis Software")
+            Return False
+        Else
+            If txtUpperLimit.Text = 0 Or txtLowerLimit.Text = 0 Then
+                MsgBox("Invalid violation check setting! Please check and retry", MsgBoxStyle.Information, "Distribution LoadFlow Analysis Software")
+                Return False
+            End If
+        End If
+
         Return True
     End Function
 
-    Private Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
-        If validateData() Then
-            arrangeData()
+    Private Sub calculateNetwork()
+        Dim fileInfo = New FileInfo("script/dat.xlsx")
+        Using package = New ExcelPackage(fileInfo)
 
-            Dim fileInfo = New FileInfo("script/dat.xlsx")
-            Using package = New ExcelPackage(fileInfo)
+            package.LicenseContext = LicenseContext.NonCommercial
 
-                package.LicenseContext = LicenseContext.NonCommercial
+            ' Export Edges
+            Dim edgeSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(0)
+            For Each kvp As KeyValuePair(Of Integer, Edge) In Project.edges
+                If kvp.Value.GetType() Is GetType(Line) Then
+                    Dim line As Line = kvp.Value
+                    edgeSheet.Cells(kvp.Key + 1, 1).Value = line.startNode
+                    edgeSheet.Cells(kvp.Key + 1, 3).Value = line.endNode
+                    edgeSheet.Cells(kvp.Key + 1, 4).Value = "L"
+                    edgeSheet.Cells(kvp.Key + 1, 5).Value = line.getParameters()
+                Else
+                    Dim transformer As Transformer = kvp.Value
+                    edgeSheet.Cells(kvp.Key + 1, 1).Value = transformer.startNode
+                    edgeSheet.Cells(kvp.Key + 1, 3).Value = transformer.endNode
+                    edgeSheet.Cells(kvp.Key + 1, 4).Value = "T"
+                    edgeSheet.Cells(kvp.Key + 1, 5).Value = transformer.getParameters()
+                End If
+            Next
 
-                ' Export Edges
-                Dim edgeSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(0)
-                For Each kvp As KeyValuePair(Of Integer, Edge) In Project.edges
-                    If kvp.Value.GetType() Is GetType(Line) Then
-                        Dim line As Line = kvp.Value
-                        edgeSheet.Cells(kvp.Key + 1, 1).Value = line.startNode
-                        edgeSheet.Cells(kvp.Key + 1, 3).Value = line.endNode
-                        edgeSheet.Cells(kvp.Key + 1, 4).Value = "L"
-                        edgeSheet.Cells(kvp.Key + 1, 5).Value = line.getParameters()
-                    Else
-                        Dim transformer As Transformer = kvp.Value
-                        edgeSheet.Cells(kvp.Key + 1, 1).Value = transformer.startNode
-                        edgeSheet.Cells(kvp.Key + 1, 3).Value = transformer.endNode
-                        edgeSheet.Cells(kvp.Key + 1, 4).Value = "T"
-                        edgeSheet.Cells(kvp.Key + 1, 5).Value = transformer.getParameters()
-                    End If
-                Next
+            ' Export Nodes
+            Dim nodeSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(1)
 
-                ' Export Nodes
-                Dim nodeSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(1)
+            For Each kvp As KeyValuePair(Of Integer, Node) In Project.loads
+                If kvp.Value.GetType() Is GetType(Load) Then
+                    Dim load As Load = kvp.Value
 
-                For Each kvp As KeyValuePair(Of Integer, Node) In Project.loads
-                    If kvp.Value.GetType() Is GetType(Load) Then
-                        Dim load As Load = kvp.Value
+                    nodeSheet.Cells(kvp.Key + 1, 1).Value = load.node
+                    nodeSheet.Cells(kvp.Key + 1, 2).Value = load.getConnection()
+                    nodeSheet.Cells(kvp.Key + 1, 3).Value = "L"
+                    nodeSheet.Cells(kvp.Key + 1, 4).Value = load.getParameters()
+                ElseIf kvp.Value.GetType() Is GetType(ShuntCapacitor) Then
+                    Dim capacitor As ShuntCapacitor = kvp.Value
 
-                        nodeSheet.Cells(kvp.Key + 1, 1).Value = load.node
-                        nodeSheet.Cells(kvp.Key + 1, 2).Value = load.getConnection()
-                        nodeSheet.Cells(kvp.Key + 1, 3).Value = "L"
-                        nodeSheet.Cells(kvp.Key + 1, 4).Value = load.getParameters()
-                    ElseIf kvp.Value.GetType() Is GetType(ShuntCapacitor) Then
-                        Dim capacitor As ShuntCapacitor = kvp.Value
+                    nodeSheet.Cells(kvp.Key + 1, 1).Value = capacitor.node
+                    nodeSheet.Cells(kvp.Key + 1, 2).Value = capacitor.getConnection()
+                    nodeSheet.Cells(kvp.Key + 1, 3).Value = "C"
+                    nodeSheet.Cells(kvp.Key + 1, 4).Value = capacitor.getParameters()
+                ElseIf kvp.Value.GetType() Is GetType(DG) Then
+                    Dim generator As DG = kvp.Value
 
-                        nodeSheet.Cells(kvp.Key + 1, 1).Value = capacitor.node
-                        nodeSheet.Cells(kvp.Key + 1, 2).Value = capacitor.getConnection()
-                        nodeSheet.Cells(kvp.Key + 1, 3).Value = "C"
-                        nodeSheet.Cells(kvp.Key + 1, 4).Value = capacitor.getParameters()
-                    ElseIf kvp.Value.GetType() Is GetType(DG) Then
-                        Dim generator As DG = kvp.Value
+                    nodeSheet.Cells(kvp.Key + 1, 1).Value = generator.node
+                    nodeSheet.Cells(kvp.Key + 1, 2).Value = generator.getConnection()
+                    nodeSheet.Cells(kvp.Key + 1, 3).Value = "D"
+                    nodeSheet.Cells(kvp.Key + 1, 4).Value = generator.getParameters()
+                End If
+            Next
 
-                        nodeSheet.Cells(kvp.Key + 1, 1).Value = generator.node
-                        nodeSheet.Cells(kvp.Key + 1, 2).Value = generator.getConnection()
-                        nodeSheet.Cells(kvp.Key + 1, 3).Value = "D"
-                        nodeSheet.Cells(kvp.Key + 1, 4).Value = generator.getParameters()
-                    End If
-                Next
+            ' Export Voltage
+            Dim voltageSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(2)
 
-                ' Export Voltage
-                Dim voltageSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(2)
+            ' Add All Nodes
+            voltageSheet.Cells(2, 1).Value = 1
+            For i As Integer = 1 To findMaximumNode()
+                voltageSheet.Cells(i + 1, 1).Value = i
+            Next
 
-                ' Add All Nodes
-                voltageSheet.Cells(2, 1).Value = 1
-                For i As Integer = 1 To findMaximumNode()
-                    voltageSheet.Cells(i + 1, 1).Value = i
-                Next
+            ' Add Swing Bus Voltage
+            voltageSheet.Cells(2, 2).Value = txtVoltage_R.Text + "," + txtVoltage_I.Text
+            voltageSheet.Cells(2, 3).Value = Convert.ToDouble(txtPower.Text)
 
-                ' Add Swing Bus Voltage
-                voltageSheet.Cells(2, 2).Value = txtVoltage_R.Text + "," + txtVoltage_I.Text
-                voltageSheet.Cells(2, 3).Value = Convert.ToDouble(txtPower.Text)
+            ' Export Settings
+            Dim settingsSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(3)
+            settingsSheet.Cells(1, 2).Value = Convert.ToDouble(txtError.Text)
+            settingsSheet.Cells(2, 2).Value = Convert.ToDouble(txtIterations.Text)
+            settingsSheet.Cells(3, 2).Value = Convert.ToDouble(txtRoundFactor.Text)
+            settingsSheet.Cells(4, 2).Value = Convert.ToDouble(txtUpperLimit.Text)
+            settingsSheet.Cells(5, 2).Value = Convert.ToDouble(txtLowerLimit.Text)
 
-                ' Export Settings
-                Dim settingsSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(3)
-                settingsSheet.Cells(1, 2).Value = Convert.ToDouble(txtError.Text)
-                settingsSheet.Cells(2, 2).Value = Convert.ToDouble(txtIterations.Text)
-                settingsSheet.Cells(3, 2).Value = Convert.ToDouble(txtRoundFactor.Text)
+            package.Save()
 
-                package.Save()
+            listLog.Items.Add("Data file created")
+        End Using
 
-                listLog.Items.Add("Data file created")
-            End Using
+        TabControl1.SelectedTab = tabResults
+        dataLog = "----- EXECUTION START -----" + vbCrLf + vbCrLf
+        dataLog += "File: " + Project.filePath + vbCrLf + vbCrLf
 
-            TabControl1.SelectedTab = tabResults
-            dataLog = "----- EXECUTION START -----" + vbCrLf + vbCrLf
-            dataLog += "File: " + Project.filePath + vbCrLf + vbCrLf
+        listLog.Items.Add("Executing data file")
+        Dim proc As Process = New Process
+        proc.StartInfo.FileName = My.Settings.pythonPath
+        proc.StartInfo.Arguments = "script/Base.py"
+        proc.StartInfo.UseShellExecute = False
+        proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+        proc.StartInfo.CreateNoWindow = True
+        proc.StartInfo.RedirectStandardOutput = True
+        proc.Start()
+        AddHandler proc.OutputDataReceived, AddressOf proccess_OutputDataReceived
+        proc.BeginOutputReadLine()
+        proc.WaitForExit()
 
-            listLog.Items.Add("Executing data file")
-            Dim proc As Process = New Process
-            proc.StartInfo.FileName = My.Settings.pythonPath
-            proc.StartInfo.Arguments = "script/Base.py"
-            proc.StartInfo.UseShellExecute = False
-            proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-            proc.StartInfo.CreateNoWindow = True
-            proc.StartInfo.RedirectStandardOutput = True
-            proc.Start()
-            AddHandler proc.OutputDataReceived, AddressOf proccess_OutputDataReceived
-            proc.BeginOutputReadLine()
-            proc.WaitForExit()
-
-            txtOutput.AppendText(dataLog)
-            txtOutput.AppendText(vbCrLf + "----- EXECUTION COMPLETED -----" + vbCrLf + vbCrLf)
-            listLog.Items.Add("Execution completed")
-        End If
+        txtOutput.AppendText(dataLog)
+        txtOutput.AppendText(vbCrLf + "----- EXECUTION COMPLETED -----" + vbCrLf + vbCrLf)
+        listLog.Items.Add("Execution completed")
     End Sub
 
     Public Sub proccess_OutputDataReceived(ByVal sender As Object, ByVal e As DataReceivedEventArgs)
         ' On Error Resume Next
         If e.Data <> "" Then
             dataLog = dataLog + e.Data + vbCrLf
+        End If
+    End Sub
+
+    Public Sub addLog(ByVal message As String, ByVal color As Color)
+        Dim item As New ListViewItem
+        item.Text = message
+        item.ForeColor = color
+        listLog.Items.Add(item)
+    End Sub
+
+    Private Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
+        If validateData() Then
+            arrangeData()
+            calculateNetwork()
+        End If
+    End Sub
+
+    Private Sub CalculateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculateToolStripMenuItem.Click
+        If validateData() Then
+            arrangeData()
+            calculateNetwork()
         End If
     End Sub
 
@@ -881,10 +916,77 @@ Public Class frmMain
         End If
     End Sub
 
-    Public Sub addLog(ByVal message As String, ByVal color As Color)
-        Dim item As New ListViewItem
-        item.Text = message
-        item.ForeColor = color
-        listLog.Items.Add(item)
+    ' *** GUI Enhancements ***
+
+    Private Sub ExportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToolStripMenuItem.Click
+        If sfdOutput.ShowDialog = Windows.Forms.DialogResult.OK Then
+            If System.IO.File.Exists(sfdOutput.FileName) = True Then
+                Dim objWriter As New System.IO.StreamWriter(sfdOutput.FileName)
+                objWriter.Write(txtOutput.Text)
+                objWriter.Close()
+            Else
+                My.Computer.FileSystem.WriteAllText(sfdOutput.FileName, txtOutput.Text, False)
+            End If
+        End If
+    End Sub
+
+    Private Sub ExportDataFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportDataFileToolStripMenuItem.Click
+        If sfdDatFile.ShowDialog = Windows.Forms.DialogResult.OK Then
+            My.Computer.FileSystem.CopyFile("script/dat.xlsx", Project.filePath)
+        End If
+    End Sub
+
+    Private Sub txtError_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtError.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtIterations_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtIterations.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+    End Sub
+
+    Private Sub txtLowerLimit_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLowerLimit.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtPower_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPower.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtRoundFactor_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRoundFactor.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+    End Sub
+
+    Private Sub txtUpperLimit_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUpperLimit.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtVoltage_I_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtVoltage_I.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
+    End Sub
+
+    Private Sub txtVoltage_R_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtVoltage_R.KeyPress
+        Dim txt As TextBox = CType(sender, TextBox)
+        If Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+        If e.KeyChar = Chr(8) Then e.Handled = False
+        If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
     End Sub
 End Class

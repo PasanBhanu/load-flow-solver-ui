@@ -112,9 +112,9 @@ Partial Class frmAddLoad
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(346, 143)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(38, 13)
+        Me.Label5.Size = New System.Drawing.Size(41, 13)
         Me.Label5.TabIndex = 46
-        Me.Label5.Text = "j    kW"
+        Me.Label5.Text = "j    kVA"
         '
         'txtPowerB_R
         '
@@ -137,18 +137,18 @@ Partial Class frmAddLoad
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(346, 118)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(38, 13)
+        Me.Label4.Size = New System.Drawing.Size(41, 13)
         Me.Label4.TabIndex = 47
-        Me.Label4.Text = "j    kW"
+        Me.Label4.Text = "j    kVA"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(346, 168)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(38, 13)
+        Me.Label6.Size = New System.Drawing.Size(41, 13)
         Me.Label6.TabIndex = 50
-        Me.Label6.Text = "j    kW"
+        Me.Label6.Text = "j    kVA"
         '
         'txtPowerC_R
         '
