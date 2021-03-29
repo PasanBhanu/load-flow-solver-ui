@@ -195,9 +195,9 @@ Partial Class frmAddDG
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(12, 166)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(86, 13)
+        Me.Label7.Size = New System.Drawing.Size(119, 13)
         Me.Label7.TabIndex = 77
-        Me.Label7.Text = "Power - Phase C"
+        Me.Label7.Text = "Active Power - Phase C"
         '
         'Label4
         '
@@ -229,9 +229,9 @@ Partial Class frmAddDG
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(12, 141)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(86, 13)
+        Me.Label3.Size = New System.Drawing.Size(119, 13)
         Me.Label3.TabIndex = 73
-        Me.Label3.Text = "Power - Phase B"
+        Me.Label3.Text = "Active Power - Phase B"
         '
         'btnAdd
         '
@@ -263,9 +263,9 @@ Partial Class frmAddDG
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(12, 116)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(86, 13)
+        Me.Label2.Size = New System.Drawing.Size(119, 13)
         Me.Label2.TabIndex = 69
-        Me.Label2.Text = "Power - Phase A"
+        Me.Label2.Text = "Active Power - Phase A"
         '
         'txtNode
         '

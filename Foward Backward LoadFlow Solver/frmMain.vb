@@ -296,9 +296,9 @@ Public Class frmMain
                     Dim voltageSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(2)
 
                     txtPower.Text = voltageSheet.Cells(2, 3).Value
-                    Dim voltage As String() = voltageSheet.Cells(2, 2).Value.ToString.Split(New Char() {"+"c})
+                    Dim voltage As String() = voltageSheet.Cells(2, 2).Value.ToString.Split(New Char() {","c})
                     txtVoltage_R.Text = voltage(0)
-                    txtVoltage_I.Text = voltage(1).Replace("j", "")
+                    txtVoltage_I.Text = voltage(1)
 
                     ' Import Settings
                     Dim settingsSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(3)
@@ -507,49 +507,53 @@ Public Class frmMain
             package.LicenseContext = LicenseContext.NonCommercial
 
             ' Export Edges
+            Dim i As Integer = 2
             Dim edgeSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(0)
             For Each kvp As KeyValuePair(Of Integer, Edge) In Project.edges
                 If kvp.Value.GetType() Is GetType(Line) Then
                     Dim line As Line = kvp.Value
-                    edgeSheet.Cells(kvp.Key + 1, 1).Value = line.startNode
-                    edgeSheet.Cells(kvp.Key + 1, 3).Value = line.endNode
-                    edgeSheet.Cells(kvp.Key + 1, 4).Value = "L"
-                    edgeSheet.Cells(kvp.Key + 1, 5).Value = line.getParameters()
+                    edgeSheet.Cells(i, 1).Value = line.startNode
+                    edgeSheet.Cells(i, 3).Value = line.endNode
+                    edgeSheet.Cells(i, 4).Value = "L"
+                    edgeSheet.Cells(i, 5).Value = line.getParameters()
                 Else
                     Dim transformer As Transformer = kvp.Value
-                    edgeSheet.Cells(kvp.Key + 1, 1).Value = transformer.startNode
-                    edgeSheet.Cells(kvp.Key + 1, 3).Value = transformer.endNode
-                    edgeSheet.Cells(kvp.Key + 1, 4).Value = "T"
-                    edgeSheet.Cells(kvp.Key + 1, 5).Value = transformer.getParameters()
+                    edgeSheet.Cells(i, 1).Value = transformer.startNode
+                    edgeSheet.Cells(i, 3).Value = transformer.endNode
+                    edgeSheet.Cells(i, 4).Value = "T"
+                    edgeSheet.Cells(i, 5).Value = transformer.getParameters()
                 End If
+                i = i + 1
             Next
 
             ' Export Nodes
+            i = 2
             Dim nodeSheet As ExcelWorksheet = package.Workbook.Worksheets.Item(1)
 
             For Each kvp As KeyValuePair(Of Integer, Node) In Project.loads
                 If kvp.Value.GetType() Is GetType(Load) Then
                     Dim load As Load = kvp.Value
 
-                    nodeSheet.Cells(kvp.Key + 1, 1).Value = load.node
-                    nodeSheet.Cells(kvp.Key + 1, 2).Value = load.getConnection()
-                    nodeSheet.Cells(kvp.Key + 1, 3).Value = "L"
-                    nodeSheet.Cells(kvp.Key + 1, 4).Value = load.getParameters()
+                    nodeSheet.Cells(i, 1).Value = load.node
+                    nodeSheet.Cells(i, 2).Value = load.getConnection()
+                    nodeSheet.Cells(i, 3).Value = "L"
+                    nodeSheet.Cells(i, 4).Value = load.getParameters()
                 ElseIf kvp.Value.GetType() Is GetType(ShuntCapacitor) Then
                     Dim capacitor As ShuntCapacitor = kvp.Value
 
-                    nodeSheet.Cells(kvp.Key + 1, 1).Value = capacitor.node
-                    nodeSheet.Cells(kvp.Key + 1, 2).Value = capacitor.getConnection()
-                    nodeSheet.Cells(kvp.Key + 1, 3).Value = "C"
-                    nodeSheet.Cells(kvp.Key + 1, 4).Value = capacitor.getParameters()
+                    nodeSheet.Cells(i, 1).Value = capacitor.node
+                    nodeSheet.Cells(i, 2).Value = capacitor.getConnection()
+                    nodeSheet.Cells(i, 3).Value = "C"
+                    nodeSheet.Cells(i, 4).Value = capacitor.getParameters()
                 ElseIf kvp.Value.GetType() Is GetType(DG) Then
                     Dim generator As DG = kvp.Value
 
-                    nodeSheet.Cells(kvp.Key + 1, 1).Value = generator.node
-                    nodeSheet.Cells(kvp.Key + 1, 2).Value = generator.getConnection()
-                    nodeSheet.Cells(kvp.Key + 1, 3).Value = "D"
-                    nodeSheet.Cells(kvp.Key + 1, 4).Value = generator.getParameters()
+                    nodeSheet.Cells(i, 1).Value = generator.node
+                    nodeSheet.Cells(i, 2).Value = generator.getConnection()
+                    nodeSheet.Cells(i, 3).Value = "D"
+                    nodeSheet.Cells(i, 4).Value = generator.getParameters()
                 End If
+                i = i + 1
             Next
 
             ' Export Voltage
@@ -557,12 +561,12 @@ Public Class frmMain
 
             ' Add All Nodes
             voltageSheet.Cells(2, 1).Value = 1
-            For i As Integer = 1 To findMaximumNode()
-                voltageSheet.Cells(i + 1, 1).Value = i
+            For j As Integer = 1 To findMaximumNode()
+                voltageSheet.Cells(j + 1, 1).Value = j
             Next
 
             ' Add Swing Bus Voltage
-            voltageSheet.Cells(2, 2).Value = txtVoltage_R.Text + "+" + txtVoltage_I.Text + "j"
+            voltageSheet.Cells(2, 2).Value = txtVoltage_R.Text + "," + txtVoltage_I.Text
             voltageSheet.Cells(2, 3).Value = Convert.ToDouble(txtPower.Text)
 
             ' Export Settings
@@ -666,7 +670,7 @@ Public Class frmMain
         If validateData() Then
             arrangeData()
 
-            Dim fileInfo = New FileInfo("dat.xlsx")
+            Dim fileInfo = New FileInfo("script/dat.xlsx")
             Using package = New ExcelPackage(fileInfo)
 
                 package.LicenseContext = LicenseContext.NonCommercial
@@ -727,7 +731,7 @@ Public Class frmMain
                 Next
 
                 ' Add Swing Bus Voltage
-                voltageSheet.Cells(2, 2).Value = txtVoltage_R.Text + "+" + txtVoltage_I.Text + "j"
+                voltageSheet.Cells(2, 2).Value = txtVoltage_R.Text + "," + txtVoltage_I.Text
                 voltageSheet.Cells(2, 3).Value = Convert.ToDouble(txtPower.Text)
 
                 ' Export Settings
@@ -741,10 +745,14 @@ Public Class frmMain
                 listLog.Items.Add("Data file created")
             End Using
 
+            TabControl1.SelectedTab = tabResults
+            dataLog = "----- EXECUTION START -----" + vbCrLf + vbCrLf
+            dataLog += "File: " + Project.filePath + vbCrLf + vbCrLf
+
             listLog.Items.Add("Executing data file")
             Dim proc As Process = New Process
             proc.StartInfo.FileName = My.Settings.pythonPath
-            proc.StartInfo.Arguments = "script.py"
+            proc.StartInfo.Arguments = "script/Base.py"
             proc.StartInfo.UseShellExecute = False
             proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
             proc.StartInfo.CreateNoWindow = True
@@ -754,14 +762,16 @@ Public Class frmMain
             proc.BeginOutputReadLine()
             proc.WaitForExit()
 
-            listLog.Items.Add(dataLog)
+            txtOutput.AppendText(dataLog)
+            txtOutput.AppendText(vbCrLf + "----- EXECUTION COMPLETED -----" + vbCrLf + vbCrLf)
+            listLog.Items.Add("Execution completed")
         End If
     End Sub
 
     Public Sub proccess_OutputDataReceived(ByVal sender As Object, ByVal e As DataReceivedEventArgs)
-        On Error Resume Next
+        ' On Error Resume Next
         If e.Data <> "" Then
-            dataLog = e.Data
+            dataLog = dataLog + e.Data + vbCrLf
         End If
     End Sub
 

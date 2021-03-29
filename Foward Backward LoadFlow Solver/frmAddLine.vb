@@ -257,7 +257,29 @@
     End Sub
 
     Private Sub btnLibrary_Click(sender As Object, e As EventArgs) Handles btnLibrary.Click
-
+        Dim dbID = frmLoadBrowser.ShowDialog(True, "Transmission Lines")
+        If dbID > 0 Then
+            Dim _line = New Line(dbID)
+            line.title = _line.title
+            line.description = _line.description
+            line.resistance_p = _line.resistance_p
+            line.gmr_p = _line.gmr_p
+            line.resistance_n = _line.resistance_n
+            line.gmr_n = _line.gmr_n
+            line.length = _line.length
+            line.frequency = _line.frequency
+            line.soilResistivity = _line.soilResistivity
+            line.type = _line.type
+            line.phases = _line.phases
+            line.isNeutralAvailable = _line.isNeutralAvailable
+            line.L_12 = _line.L_12
+            line.L_23 = _line.L_23
+            line.L_13 = _line.L_13
+            line.L_1N = _line.L_1N
+            line.L_2N = _line.L_2N
+            line.L_3N = _line.L_3N
+            setupForm()
+        End If
     End Sub
 
     Private Sub btnAddToLibrary_Click(sender As Object, e As EventArgs) Handles btnAddToLibrary.Click

@@ -111,7 +111,19 @@ Public Class frmAddDG
     End Sub
 
     Private Sub btnLibrary_Click(sender As Object, e As EventArgs) Handles btnLibrary.Click
-
+        Dim dbID = frmLoadBrowser.ShowDialog(True, "Distributed Generators")
+        If dbID > 0 Then
+            Dim _generator = New DG(dbID)
+            generator.title = _generator.title
+            generator.description = _generator.description
+            generator.powerA = _generator.powerA
+            generator.powerB = _generator.powerB
+            generator.powerC = _generator.powerC
+            generator.pfA = _generator.pfA
+            generator.pfB = _generator.pfB
+            generator.pfC = _generator.pfC
+            setupForm()
+        End If
     End Sub
 
     Private Sub btnAddToLibrary_Click(sender As Object, e As EventArgs) Handles btnAddToLibrary.Click

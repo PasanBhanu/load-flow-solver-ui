@@ -95,7 +95,19 @@ Public Class frmAddShuntCapacitor
     End Sub
 
     Private Sub btnLibrary_Click(sender As Object, e As EventArgs) Handles btnLibrary.Click
-
+        Dim dbID = frmLoadBrowser.ShowDialog(True, "Capacitor Banks")
+        If dbID > 0 Then
+            Dim _capacitor = New ShuntCapacitor(dbID)
+            capacitor.title = _capacitor.title
+            capacitor.description = _capacitor.description
+            capacitor.kvarA = _capacitor.kvarA
+            capacitor.kvarB = _capacitor.kvarB
+            capacitor.kvarC = _capacitor.kvarC
+            capacitor.voltageA = _capacitor.voltageA
+            capacitor.voltageB = _capacitor.voltageB
+            capacitor.voltageC = _capacitor.voltageC
+            setupForm()
+        End If
     End Sub
 
     Private Sub btnAddToLibrary_Click(sender As Object, e As EventArgs) Handles btnAddToLibrary.Click

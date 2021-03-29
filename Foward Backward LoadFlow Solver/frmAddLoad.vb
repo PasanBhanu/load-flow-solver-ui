@@ -101,7 +101,15 @@ Public Class frmAddLoad
     Private Sub btnLibrary_Click(sender As Object, e As EventArgs) Handles btnLibrary.Click
         Dim dbID = frmLoadBrowser.ShowDialog(True, "Loads")
         If dbID > 0 Then
-            load = New Load(dbID)
+            Dim _load = New Load(dbID)
+            load.title = _load.title
+            load.description = _load.description
+            load.powerA = _load.powerA
+            load.powerB = _load.powerB
+            load.powerC = _load.powerC
+            load.cpq = _load.cpq
+            load.cc = _load.cc
+            load.ci = _load.ci
             setupForm()
         End If
     End Sub

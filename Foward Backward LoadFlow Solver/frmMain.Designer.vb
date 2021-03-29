@@ -23,8 +23,8 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Program Initiated")
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Database Connected")
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Program Initiated")
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Database Connected")
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -93,16 +93,21 @@ Partial Class frmMain
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.listLog = New System.Windows.Forms.ListView()
+        Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.txtOutput = New System.Windows.Forms.TextBox()
+        Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.tabEdges.SuspendLayout()
         Me.tabLoads.SuspendLayout()
         Me.tabSettings.SuspendLayout()
+        Me.tabResults.SuspendLayout()
         Me.panViewer.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 627)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 12, 0)
@@ -133,7 +138,7 @@ Partial Class frmMain
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'OpenToolStripMenuItem
@@ -142,13 +147,13 @@ Partial Class frmMain
         Me.OpenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.OpenToolStripMenuItem.Text = "&Open"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(143, 6)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(177, 6)
         '
         'SaveToolStripMenuItem
         '
@@ -156,24 +161,24 @@ Partial Class frmMain
         Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SaveToolStripMenuItem.Text = "&Save"
         '
         'SaveAsToolStripMenuItem
         '
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
-        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SaveAsToolStripMenuItem.Text = "Save &As"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(143, 6)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'SimulationToolStripMenuItem
@@ -187,37 +192,37 @@ Partial Class frmMain
         '
         Me.CalculateToolStripMenuItem.Name = "CalculateToolStripMenuItem"
         Me.CalculateToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5
-        Me.CalculateToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.CalculateToolStripMenuItem.Text = "Start Calculation"
+        Me.CalculateToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.CalculateToolStripMenuItem.Text = "Calculate Loadflow"
         '
         'ValidateToolStripMenuItem
         '
         Me.ValidateToolStripMenuItem.Name = "ValidateToolStripMenuItem"
         Me.ValidateToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6
-        Me.ValidateToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ValidateToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.ValidateToolStripMenuItem.Text = "Validate"
         '
         'ExportToolStripMenuItem
         '
         Me.ExportToolStripMenuItem.Name = "ExportToolStripMenuItem"
-        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.ExportToolStripMenuItem.Text = "Export Results"
         '
         'ExportDataFileToolStripMenuItem
         '
         Me.ExportDataFileToolStripMenuItem.Name = "ExportDataFileToolStripMenuItem"
-        Me.ExportDataFileToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExportDataFileToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.ExportDataFileToolStripMenuItem.Text = "Export Data File"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(191, 6)
         '
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'ToolsToolStripMenuItem
@@ -230,7 +235,7 @@ Partial Class frmMain
         'ModelBrowserToolStripMenuItem
         '
         Me.ModelBrowserToolStripMenuItem.Name = "ModelBrowserToolStripMenuItem"
-        Me.ModelBrowserToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.ModelBrowserToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ModelBrowserToolStripMenuItem.Text = "Model Browser"
         '
         'HelpToolStripMenuItem
@@ -243,7 +248,7 @@ Partial Class frmMain
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'TabControl1
@@ -269,7 +274,7 @@ Partial Class frmMain
         Me.tabEdges.Padding = New System.Windows.Forms.Padding(3)
         Me.tabEdges.Size = New System.Drawing.Size(668, 398)
         Me.tabEdges.TabIndex = 0
-        Me.tabEdges.Text = "Edges"
+        Me.tabEdges.Text = "Branches"
         Me.tabEdges.UseVisualStyleBackColor = True
         '
         'listEdges
@@ -345,7 +350,7 @@ Partial Class frmMain
         Me.tabLoads.Padding = New System.Windows.Forms.Padding(3)
         Me.tabLoads.Size = New System.Drawing.Size(668, 398)
         Me.tabLoads.TabIndex = 1
-        Me.tabLoads.Text = "Loads & Devices"
+        Me.tabLoads.Text = "Loads, Capacitor Banks & DGs"
         Me.tabLoads.UseVisualStyleBackColor = True
         '
         'listLoads
@@ -441,13 +446,13 @@ Partial Class frmMain
         Me.tabSettings.Padding = New System.Windows.Forms.Padding(3)
         Me.tabSettings.Size = New System.Drawing.Size(668, 398)
         Me.tabSettings.TabIndex = 2
-        Me.tabSettings.Text = "Settings"
+        Me.tabSettings.Text = "Calculation Settings"
         Me.tabSettings.UseVisualStyleBackColor = True
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(219, 214)
+        Me.Label13.Location = New System.Drawing.Point(322, 214)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(27, 13)
         Me.Label13.TabIndex = 73
@@ -458,13 +463,13 @@ Partial Class frmMain
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(31, 214)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(37, 13)
+        Me.Label12.Size = New System.Drawing.Size(112, 13)
         Me.Label12.TabIndex = 72
-        Me.Label12.Text = "Power"
+        Me.Label12.Text = "Substation Fault Level"
         '
         'txtPower
         '
-        Me.txtPower.Location = New System.Drawing.Point(129, 211)
+        Me.txtPower.Location = New System.Drawing.Point(232, 211)
         Me.txtPower.Name = "txtPower"
         Me.txtPower.Size = New System.Drawing.Size(86, 20)
         Me.txtPower.TabIndex = 71
@@ -474,16 +479,17 @@ Partial Class frmMain
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(219, 189)
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(321, 181)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(13, 13)
+        Me.Label10.Size = New System.Drawing.Size(20, 24)
         Me.Label10.TabIndex = 70
-        Me.Label10.Text = "+"
+        Me.Label10.Text = "∠"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtVoltage_I
         '
-        Me.txtVoltage_I.Location = New System.Drawing.Point(237, 186)
+        Me.txtVoltage_I.Location = New System.Drawing.Point(342, 186)
         Me.txtVoltage_I.Name = "txtVoltage_I"
         Me.txtVoltage_I.Size = New System.Drawing.Size(86, 20)
         Me.txtVoltage_I.TabIndex = 69
@@ -493,15 +499,15 @@ Partial Class frmMain
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(328, 189)
+        Me.Label9.Location = New System.Drawing.Point(433, 189)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(28, 13)
+        Me.Label9.Size = New System.Drawing.Size(14, 13)
         Me.Label9.TabIndex = 68
-        Me.Label9.Text = "j    V"
+        Me.Label9.Text = "V"
         '
         'txtVoltage_R
         '
-        Me.txtVoltage_R.Location = New System.Drawing.Point(129, 186)
+        Me.txtVoltage_R.Location = New System.Drawing.Point(232, 186)
         Me.txtVoltage_R.Name = "txtVoltage_R"
         Me.txtVoltage_R.Size = New System.Drawing.Size(86, 20)
         Me.txtVoltage_R.TabIndex = 67
@@ -513,9 +519,9 @@ Partial Class frmMain
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(31, 189)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(43, 13)
+        Me.Label11.Size = New System.Drawing.Size(184, 13)
         Me.Label11.TabIndex = 66
-        Me.Label11.Text = "Voltage"
+        Me.Label11.Text = "Substation Voltage (Outgoing Busbar)"
         '
         'Label8
         '
@@ -593,11 +599,12 @@ Partial Class frmMain
         '
         'tabResults
         '
+        Me.tabResults.Controls.Add(Me.txtOutput)
         Me.tabResults.Location = New System.Drawing.Point(4, 22)
         Me.tabResults.Name = "tabResults"
         Me.tabResults.Size = New System.Drawing.Size(668, 398)
         Me.tabResults.TabIndex = 3
-        Me.tabResults.Text = "Results"
+        Me.tabResults.Text = "Output"
         Me.tabResults.UseVisualStyleBackColor = True
         '
         'Label1
@@ -661,11 +668,11 @@ Partial Class frmMain
         '
         'btnCalculate
         '
-        Me.btnCalculate.Location = New System.Drawing.Point(608, 484)
+        Me.btnCalculate.Location = New System.Drawing.Point(562, 484)
         Me.btnCalculate.Name = "btnCalculate"
-        Me.btnCalculate.Size = New System.Drawing.Size(75, 23)
+        Me.btnCalculate.Size = New System.Drawing.Size(121, 23)
         Me.btnCalculate.TabIndex = 8
-        Me.btnCalculate.Text = "Calculate"
+        Me.btnCalculate.Text = "Calculate Loadflow"
         Me.btnCalculate.UseVisualStyleBackColor = True
         '
         'OpenFileDialog1
@@ -680,14 +687,33 @@ Partial Class frmMain
         '
         'listLog
         '
-        Me.listLog.HideSelection = False
-        Me.listLog.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2})
+        Me.listLog.FullRowSelect = True
+        Me.listLog.GridLines = True
+        Me.listLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.listLog.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem3, ListViewItem4})
         Me.listLog.Location = New System.Drawing.Point(11, 532)
+        Me.listLog.MultiSelect = False
         Me.listLog.Name = "listLog"
         Me.listLog.Size = New System.Drawing.Size(1069, 84)
         Me.listLog.TabIndex = 9
         Me.listLog.UseCompatibleStateImageBehavior = False
         Me.listLog.View = System.Windows.Forms.View.List
+        '
+        'lblStatus
+        '
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(39, 17)
+        Me.lblStatus.Text = "Ready"
+        '
+        'txtOutput
+        '
+        Me.txtOutput.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOutput.Location = New System.Drawing.Point(3, 3)
+        Me.txtOutput.Multiline = True
+        Me.txtOutput.Name = "txtOutput"
+        Me.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtOutput.Size = New System.Drawing.Size(662, 392)
+        Me.txtOutput.TabIndex = 0
         '
         'frmMain
         '
@@ -709,6 +735,8 @@ Partial Class frmMain
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Distribution LoadFlow Analysis Software"
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
@@ -716,6 +744,8 @@ Partial Class frmMain
         Me.tabLoads.ResumeLayout(False)
         Me.tabSettings.ResumeLayout(False)
         Me.tabSettings.PerformLayout()
+        Me.tabResults.ResumeLayout(False)
+        Me.tabResults.PerformLayout()
         Me.panViewer.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -794,4 +824,6 @@ Partial Class frmMain
     Friend WithEvents ColumnHeader4 As ColumnHeader
     Friend WithEvents viewer As Microsoft.Glee.GraphViewerGdi.GViewer
     Friend WithEvents listLog As ListView
+    Friend WithEvents lblStatus As ToolStripStatusLabel
+    Friend WithEvents txtOutput As TextBox
 End Class

@@ -126,7 +126,20 @@
     End Sub
 
     Private Sub btnLibrary_Click(sender As Object, e As EventArgs) Handles btnLibrary.Click
-
+        Dim dbID = frmLoadBrowser.ShowDialog(True, "Transformers")
+        If dbID > 0 Then
+            Dim _transformer = New Transformer(dbID)
+            transformer.title = _transformer.title
+            transformer.description = _transformer.description
+            transformer.power = _transformer.power
+            transformer.primaryVoltage = _transformer.primaryVoltage
+            transformer.secondaryVoltage = _transformer.secondaryVoltage
+            transformer.percentageImpedance = _transformer.percentageImpedance
+            transformer.phaseAngle = _transformer.phaseAngle
+            transformer.type = _transformer.type
+            transformer.xrRatio = _transformer.xrRatio
+            setupForm()
+        End If
     End Sub
 
     Private Sub btnAddToLibrary_Click(sender As Object, e As EventArgs) Handles btnAddToLibrary.Click
