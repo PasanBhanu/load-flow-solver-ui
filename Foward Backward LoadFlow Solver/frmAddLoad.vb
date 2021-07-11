@@ -146,4 +146,8 @@ Public Class frmAddLoad
         load.ci = txtCI.Text
         load.connection = cmbConnection.Text
     End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Process.Start(Application.StartupPath & "\help\load.pdf")
+    End Sub
 End Class

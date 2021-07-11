@@ -142,4 +142,8 @@ Public Class frmAddShuntCapacitor
         capacitor.voltageC = New Complex(txtVoltageC_R.Text, txtVoltageC_I.Text)
         capacitor.connection = cmbConnection.Text
     End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Process.Start(Application.StartupPath & "\help\capacitor.pdf")
+    End Sub
 End Class

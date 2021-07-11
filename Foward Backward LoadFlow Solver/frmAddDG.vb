@@ -158,4 +158,8 @@ Public Class frmAddDG
         generator.pfC = txtPfC.Text
         generator.connection = cmbConnection.Text
     End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Process.Start(Application.StartupPath & "\help\dg.pdf")
+    End Sub
 End Class

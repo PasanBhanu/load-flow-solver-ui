@@ -22,6 +22,7 @@ Partial Class frmAddLine
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAddLine))
         Me.txtEndNode = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtStartNode = New System.Windows.Forms.TextBox()
@@ -86,6 +87,7 @@ Partial Class frmAddLine
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.btnAddToLibrary = New System.Windows.Forms.Button()
+        Me.btnHelp = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtEndNode
@@ -643,11 +645,22 @@ Partial Class frmAddLine
         Me.btnAddToLibrary.Text = "Add To Library"
         Me.btnAddToLibrary.UseVisualStyleBackColor = True
         '
+        'btnHelp
+        '
+        Me.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnHelp.Image = CType(resources.GetObject("btnHelp.Image"), System.Drawing.Image)
+        Me.btnHelp.Location = New System.Drawing.Point(397, 417)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(23, 23)
+        Me.btnHelp.TabIndex = 113
+        Me.btnHelp.UseVisualStyleBackColor = True
+        '
         'frmAddLine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(517, 452)
+        Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnAddToLibrary)
         Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.txtDescription)
@@ -787,4 +800,5 @@ Partial Class frmAddLine
     Friend WithEvents Label30 As Label
     Friend WithEvents Label31 As Label
     Friend WithEvents btnAddToLibrary As Button
+    Friend WithEvents btnHelp As Button
 End Class

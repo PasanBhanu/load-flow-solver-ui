@@ -152,4 +152,8 @@
             MsgBox("Model successfully saved to database", MsgBoxStyle.Information, "Distribution LoadFlow Analysis Software")
         End If
     End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Process.Start(Application.StartupPath & "\help\transformer.pdf")
+    End Sub
 End Class

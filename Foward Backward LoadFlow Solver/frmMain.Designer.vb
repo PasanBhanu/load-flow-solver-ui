@@ -151,7 +151,7 @@ Partial Class frmMain
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'OpenToolStripMenuItem
@@ -160,13 +160,13 @@ Partial Class frmMain
         Me.OpenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.OpenToolStripMenuItem.Text = "&Open"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(177, 6)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(143, 6)
         '
         'SaveToolStripMenuItem
         '
@@ -174,24 +174,24 @@ Partial Class frmMain
         Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.SaveToolStripMenuItem.Text = "&Save"
         '
         'SaveAsToolStripMenuItem
         '
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
-        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.SaveAsToolStripMenuItem.Text = "Save &As"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(143, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'SimulationToolStripMenuItem
@@ -248,7 +248,7 @@ Partial Class frmMain
         'ModelBrowserToolStripMenuItem
         '
         Me.ModelBrowserToolStripMenuItem.Name = "ModelBrowserToolStripMenuItem"
-        Me.ModelBrowserToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.ModelBrowserToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ModelBrowserToolStripMenuItem.Text = "Model Browser"
         '
         'HelpToolStripMenuItem
@@ -261,7 +261,7 @@ Partial Class frmMain
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'TabControl1

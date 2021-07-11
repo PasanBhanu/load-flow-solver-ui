@@ -22,6 +22,7 @@ Partial Class frmAddLoad
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAddLoad))
         Me.txtPowerA_R = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtNode = New System.Windows.Forms.TextBox()
@@ -55,6 +56,7 @@ Partial Class frmAddLoad
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.btnAddToLibrary = New System.Windows.Forms.Button()
+        Me.btnHelp = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtPowerA_R
@@ -334,11 +336,22 @@ Partial Class frmAddLoad
         Me.btnAddToLibrary.Text = "Add To Library"
         Me.btnAddToLibrary.UseVisualStyleBackColor = True
         '
+        'btnHelp
+        '
+        Me.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnHelp.Image = CType(resources.GetObject("btnHelp.Image"), System.Drawing.Image)
+        Me.btnHelp.Location = New System.Drawing.Point(276, 303)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(23, 23)
+        Me.btnHelp.TabIndex = 113
+        Me.btnHelp.UseVisualStyleBackColor = True
+        '
         'frmAddLoad
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(394, 334)
+        Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnAddToLibrary)
         Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.txtDescription)
@@ -416,4 +429,5 @@ Partial Class frmAddLoad
     Friend WithEvents Label30 As Label
     Friend WithEvents Label31 As Label
     Friend WithEvents btnAddToLibrary As Button
+    Friend WithEvents btnHelp As Button
 End Class

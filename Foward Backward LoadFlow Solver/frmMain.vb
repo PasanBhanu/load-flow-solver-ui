@@ -683,6 +683,7 @@ Public Class frmMain
     End Function
 
     Private Sub calculateNetwork()
+        My.Computer.FileSystem.CopyFile("data.xlsx", "script/dat.xlsx", True)
         Dim fileInfo = New FileInfo("script/dat.xlsx")
         Using package = New ExcelPackage(fileInfo)
 
@@ -818,6 +819,11 @@ Public Class frmMain
 
     Private Sub ModelBrowserToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelBrowserToolStripMenuItem.Click
         frmBrowser.Show()
+    End Sub
+
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        frmAbout.Show()
     End Sub
 
     Private Sub listEdges_DoubleClick(sender As Object, e As EventArgs) Handles listEdges.DoubleClick
@@ -989,4 +995,5 @@ Public Class frmMain
         If e.KeyChar = Chr(8) Then e.Handled = False
         If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
     End Sub
+
 End Class

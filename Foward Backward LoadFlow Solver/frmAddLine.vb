@@ -478,4 +478,7 @@
         If e.KeyChar = "." And txt.Text.IndexOf(".") = -1 Then e.Handled = False
     End Sub
 
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Process.Start(Application.StartupPath & "\help\line.pdf")
+    End Sub
 End Class
